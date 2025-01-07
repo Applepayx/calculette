@@ -165,6 +165,10 @@
         } else {
             const img = document.createElement('img');
             img.src = src;
+            img.src = src;
+            img.style.objectFit = 'contain';
+            img.style.maxWidth = '50%';
+            img.style.maxHeight = '50%';
             viewerContent.appendChild(img);
         }
 
