@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Photo Gallery">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <title>Photo Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div id="password-screen">
+        <h1>Apple Pay</h1>
+        <input type="password" id="password" placeholder="Enter Apple ID" oninput="checkPassword()">
+        <p id="error-message"></p>
+    </div>
+
+    <div id="gallery" style="display: none;">
+        <h1>Gallery</h1>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openViewer('photos/photo1.jpg')">
+                <img src="photos/photo1.jpg" alt="Photo 1">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/photo2.jpg')">
+                <img src="photos/photo2.jpg" alt="Photo 2">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/photo3.jpg')">
+                <img src="photos/photo3.jpg" alt="Photo 3">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/video1.mp4')">
+                <video autoplay muted loop>
+                    <source src="photos/video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div id="viewer" style="display: none;">
+        <button class="close-button" onclick="closeViewer()">Close</button>
+        <div id="viewer-content"></div>
+    </div>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+        }
+
+        #password-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #password {
+            font-size: 18px;
+            padding: 10px;
+            margin-top: 20px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        #password:focus {
+            border-color: #4caf50;
+            box-shadow: 0 0 10px #4caf50;
+        }
+
+        #gallery {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: auto;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            cursor: pointer;
+            filter: brightness(0.8);
+            text-decoration: none;
+        }
+
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            filter: brightness(1);
+        }
+
+        #viewer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .close-button:hover {
+            background-color: #ddd;
+        }
+    </style>
+</body>
+<script>
+    function openViewer(src) {
+        const viewerContent = document.getElementById('viewer-content');
+        viewerContent.innerHTML = '';
+
+        if (src.endsWith('.mp4')) {
+            const video = document.createElement('video');
+            video.src = src;
+            video.controls = true;
+            video.autoplay = true;
+            viewerContent.appendChild(video);
+        } else {
+            const img = document.createElement('img');
+            img.src = src;
+            viewerContent.appendChild(img);
+        }
+
+        document.getElementById('gallery').style.display = 'none';
+        document.getElementById('viewer').style.display = 'flex';
+    }
+
+    function closeViewer() {
+        document.getElementById('viewer').style.display = 'none';
+        document.getElementById('gallery').style.display = 'block';
+    }
+</script>
+</html>
