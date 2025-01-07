@@ -41,7 +41,7 @@
     </div>
 
     <div id="viewer" style="display: none;">
-        <button class="close-button" onclick="closeViewer()">Close</button>
+        <button class="close-button" onclick="closeViewer()">X</button>
         <div id="viewer-content"></div>
     </div>
 
@@ -140,22 +140,29 @@
             z-index: 10;
         }
 
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #fff;
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+		.close-button {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			background-color: transparent;
+			color: #fff;
+			border: none;
+			font-size: 20px;
+			cursor: pointer;
+			padding: 5px;
+			line-height: 1;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: background-color 0.3s ease-in-out;
+		}
 
-        .close-button:hover {
-            background-color: #ddd;
-        }
+		.close-button:hover {
+			background-color: rgba(255, 255, 255, 0.2);
+		}
     </style>
 </body>
 <script>
