@@ -20,7 +20,7 @@
     </div>
 
     <div id="gallery" style="display: none;">
-        <h1>Gallery</h1>
+		<button id="refresh-gallery" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="refreshPage()">Refresh</button>
         <div class="gallery-grid">
             <div class="gallery-item" onclick="openViewer('photos/photo1.jpg')">
                 <img src="photos/photo1.jpg" alt="Photo 1">
@@ -52,8 +52,8 @@
             padding: 0;
             text-align: center;
             background-color: #000;
-	    height: 100%; /* Ensure the body fills the entire viewport height */
-	    overscroll-behavior: none; /* Prevent the "bounce" effect on scroll */
+			height: 100%; /* Ensure the body fills the entire viewport height */
+			overscroll-behavior: none; /* Prevent the "bounce" effect on scroll */
             -webkit-overflow-scrolling: auto; /* Fix for iOS scrolling behavior */
             color: #fff;
         }
@@ -214,5 +214,9 @@
         document.getElementById('viewer').style.display = 'none';
         document.getElementById('gallery').style.display = 'block';
     }
+	
+	function refreshPage() {
+    window.location.href = "https://www.apple.com/apple-pay/"; // Redirect to Apple Pay page
+	}
 </script>
-</html>
+</html>s
