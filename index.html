@@ -22,15 +22,42 @@
     <div id="gallery" style="display: none;">
 		<button id="refresh-gallery" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="refreshPage()">Refresh</button>
         <div class="gallery-grid">
-            <div class="gallery-item" onclick="openViewer('photos/photo1.jpg')">
-                <img src="photos/photo1.jpg" alt="Photo 1">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/photo2.jpg')">
-                <img src="photos/photo2.jpg" alt="Photo 2">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/photo3.jpg')">
-                <img src="photos/photo3.jpg" alt="Photo 3">
-            </div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo1.JPG')">
+			<img src="photos/Photo1.JPG" alt="Photo 1">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo2.JPG')">
+			<img src="photos/Photo2.JPG" alt="Photo 2">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo3.JPG')">
+			<img src="photos/Photo3.JPG" alt="Photo 3">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo4.JPG')">
+			<img src="photos/Photo4.JPG" alt="Photo 4">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo5.JPG')">
+			<img src="photos/Photo5.JPG" alt="Photo 5">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo6.JPG')">
+			<img src="photos/Photo6.JPG" alt="Photo 6">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo7.JPG')">
+			<img src="photos/Photo7.JPG" alt="Photo 7">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo8.JPG')">
+			<img src="photos/Photo8.JPG" alt="Photo 8">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo9.JPG')">
+			<img src="photos/Photo9.JPG" alt="Photo 9">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo10.JPG')">
+			<img src="photos/Photo10.JPG" alt="Photo 10">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo11.JPG')">
+			<img src="photos/Photo11.JPG" alt="Photo 11">
+		</div>
+		<div class="gallery-item" onclick="openViewer('photos/Photo12.JPG')">
+			<img src="photos/Photo12.JPG" alt="Photo 12">
+		</div>
             <div class="gallery-item" onclick="openViewer('photos/video1.mp4')">
                 <video autoplay muted loop>
                     <source src="photos/video1.mp4" type="video/mp4">
@@ -144,29 +171,29 @@
             z-index: 10;
         }
 
-	.close-button {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		background-color: transparent;
-		color: #fff;
-		border: none;
-		font-size: 20px;
-		cursor: pointer;
-		padding: 5px;
-		line-height: 1;
-		border-radius: 50%;
-		width: 40px;
-		height: 40px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		transition: background-color 0.3s ease-in-out;
-	}
+		.close-button {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			background-color: transparent;
+			color: #fff;
+			border: none;
+			font-size: 20px;
+			cursor: pointer;
+			padding: 5px;
+			line-height: 1;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: background-color 0.3s ease-in-out;
+		}
 
-	.close-button:hover {
-		background-color: rgba(255, 255, 255, 0.2);
-	}
+		.close-button:hover {
+			background-color: rgba(255, 255, 255, 0.2);
+		}
 		
     </style>
 </body>
@@ -217,8 +244,8 @@
         document.getElementById('gallery').style.display = 'block';
     }
 	
-    function refreshPage() {
-	location.reload(); // Reloads the page to prompt the password again
+	function refreshPage() {
+   	 location.reload(); // Reloads the page to prompt the password again
 	}
 </script>
 </html>
