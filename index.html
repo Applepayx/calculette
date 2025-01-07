@@ -46,13 +46,16 @@
     </div>
 
     <style>
-        html {
+        html, body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
             background-color: #000;
-	    height: 100%; /* Ensure the body fills the entire viewport height */
+			height: 100%; /* Ensure the body fills the entire viewport height */
+			overscroll-behavior: none; /* Prevent the "bounce" effect on scroll */
+            -webkit-overflow-scrolling: auto; /* Fix for iOS scrolling behavior */
+			user-select: none; /* Prevent text selection */
             color: #fff;
         }
 
@@ -141,29 +144,30 @@
             z-index: 10;
         }
 
-		.close-button {
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			background-color: transparent;
-			color: #fff;
-			border: none;
-			font-size: 20px;
-			cursor: pointer;
-			padding: 5px;
-			line-height: 1;
-			border-radius: 50%;
-			width: 40px;
-			height: 40px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			transition: background-color 0.3s ease-in-out;
-		}
+	.close-button {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		background-color: transparent;
+		color: #fff;
+		border: none;
+		font-size: 20px;
+		cursor: pointer;
+		padding: 5px;
+		line-height: 1;
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background-color 0.3s ease-in-out;
+	}
 
-		.close-button:hover {
-			background-color: rgba(255, 255, 255, 0.2);
-		}
+	.close-button:hover {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+		
     </style>
 </body>
 <script>
@@ -213,7 +217,8 @@
         document.getElementById('gallery').style.display = 'block';
     }
 	
-	function refreshPage() {
-	location.reload(); // Reloads the page to prompt the password again	}
+    function refreshPage() {
+	location.reload(); // Reloads the page to prompt the password again
+	}
 </script>
 </html>
