@@ -22,7 +22,7 @@ function checkPassword() {
     const password = document.getElementById('password').value;
     const errorMessage = document.getElementById('error-message');
 
-    if (password === 'aaaa') { // Replace 'aaaa' with your desired password
+    if (password === '"10') { // Replace 'aaaa' with your desired password
         // Hide the password screen and show the gallery
         document.getElementById('password-screen').style.display = 'none';
         document.getElementById('gallery').style.display = 'block';
