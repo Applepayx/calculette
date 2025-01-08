@@ -20,44 +20,44 @@
     </div>
 
     <div id="gallery" style="display: none;">
-		<button id="refresh-gallery" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="refreshPage()">Refresh</button>
+        <button id="refresh-gallery" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="refreshPage()">Refresh</button>
         <div class="gallery-grid">
-		<div class="gallery-item" onclick="openViewer('photos/Photo1.JPG')">
-			<img src="photos/Photo1.JPG" alt="Photo 1">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo2.JPG')">
-			<img src="photos/Photo2.JPG" alt="Photo 2">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo3.JPG')">
-			<img src="photos/Photo3.JPG" alt="Photo 3">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo4.JPG')">
-			<img src="photos/Photo4.JPG" alt="Photo 4">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo5.JPG')">
-			<img src="photos/Photo5.JPG" alt="Photo 5">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo6.JPG')">
-			<img src="photos/Photo6.JPG" alt="Photo 6">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo7.JPG')">
-			<img src="photos/Photo7.JPG" alt="Photo 7">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo8.JPG')">
-			<img src="photos/Photo8.JPG" alt="Photo 8">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo9.JPG')">
-			<img src="photos/Photo9.JPG" alt="Photo 9">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo10.JPG')">
-			<img src="photos/Photo10.JPG" alt="Photo 10">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo11.JPG')">
-			<img src="photos/Photo11.JPG" alt="Photo 11">
-		</div>
-		<div class="gallery-item" onclick="openViewer('photos/Photo12.JPG')">
-			<img src="photos/Photo12.JPG" alt="Photo 12">
-		</div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo1.JPG')">
+                <img src="photos/Photo1.JPG" alt="Photo 1">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo2.JPG')">
+                <img src="photos/Photo2.JPG" alt="Photo 2">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo3.JPG')">
+                <img src="photos/Photo3.JPG" alt="Photo 3">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo4.JPG')">
+                <img src="photos/Photo4.JPG" alt="Photo 4">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo5.JPG')">
+                <img src="photos/Photo5.JPG" alt="Photo 5">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo6.JPG')">
+                <img src="photos/Photo6.JPG" alt="Photo 6">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo7.JPG')">
+                <img src="photos/Photo7.JPG" alt="Photo 7">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo8.JPG')">
+                <img src="photos/Photo8.JPG" alt="Photo 8">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo9.JPG')">
+                <img src="photos/Photo9.JPG" alt="Photo 9">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo10.JPG')">
+                <img src="photos/Photo10.JPG" alt="Photo 10">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo11.JPG')">
+                <img src="photos/Photo11.JPG" alt="Photo 11">
+            </div>
+            <div class="gallery-item" onclick="openViewer('photos/Photo12.JPG')">
+                <img src="photos/Photo12.JPG" alt="Photo 12">
+            </div>
             <div class="gallery-item" onclick="openViewer('photos/video1.mp4')">
                 <video autoplay muted loop>
                     <source src="photos/video1.mp4" type="video/mp4">
@@ -79,10 +79,10 @@
             padding: 0;
             text-align: center;
             background-color: #000;
-			height: 100%; /* Ensure the body fills the entire viewport height */
-			overscroll-behavior: none; /* Prevent the "bounce" effect on scroll */
+            height: 100%; /* Ensure the body fills the entire viewport height */
+            overscroll-behavior: none; /* Prevent the "bounce" effect on scroll */
             -webkit-overflow-scrolling: auto; /* Fix for iOS scrolling behavior */
-			user-select: none; /* Prevent text selection */
+            user-select: none; /* Prevent text selection */
             color: #fff;
         }
 
@@ -142,7 +142,7 @@
             border-radius: 5px;
             transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
             cursor: pointer;
-            filter: brightness(0.8);
+            filter: brightness(1);
             text-decoration: none;
         }
 
@@ -171,71 +171,70 @@
             z-index: 10;
         }
 
-		.close-button {
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			background-color: transparent;
-			color: #fff;
-			border: none;
-			font-size: 20px;
-			cursor: pointer;
-			padding: 5px;
-			line-height: 1;
-			border-radius: 50%;
-			width: 40px;
-			height: 40px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			transition: background-color 0.3s ease-in-out;
-		}
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease-in-out;
+        }
 
-		.close-button:hover {
-			background-color: rgba(255, 255, 255, 0.2);
-		}
-		
+        .close-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </body>
 <script>
     let savedScrollPosition = 0; // Variable to store scroll position
 
-function openViewer(src) {
-    const viewerContent = document.getElementById('viewer-content');
-    viewerContent.innerHTML = '';
+    function openViewer(src) {
+        const viewerContent = document.getElementById('viewer-content');
+        viewerContent.innerHTML = '';
 
-    // Save the current scroll position
-    savedScrollPosition = window.scrollY;
+        // Save the current scroll position
+        savedScrollPosition = window.scrollY;
 
-    if (src.endsWith('.mp4')) {
-        const video = document.createElement('video');
-        video.src = src;
-        video.controls = true;
-        video.autoplay = true;
-        viewerContent.appendChild(video);
-    } else {
-        const img = document.createElement('img');
-        img.src = src;
-        img.style.objectFit = 'contain';
-        img.style.maxWidth = '100%';
-        img.style.maxHeight = '100%';
-        viewerContent.appendChild(img);
+        if (src.endsWith('.mp4')) {
+            const video = document.createElement('video');
+            video.src = src;
+            video.controls = true;
+            video.autoplay = true;
+            viewerContent.appendChild(video);
+        } else {
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.objectFit = 'contain';
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '100%';
+            viewerContent.appendChild(img);
+        }
+
+        document.getElementById('gallery').style.display = 'none';
+        document.getElementById('viewer').style.display = 'flex';
     }
 
-    document.getElementById('gallery').style.display = 'none';
-    document.getElementById('viewer').style.display = 'flex';
-}
+    function closeViewer() {
+        document.getElementById('viewer').style.display = 'none';
+        document.getElementById('gallery').style.display = 'block';
 
-function closeViewer() {
-    document.getElementById('viewer').style.display = 'none';
-    document.getElementById('gallery').style.display = 'block';
-
-    // Restore the previous scroll position
-    window.scrollTo(0, savedScrollPosition);
-}
-	
-	function refreshPage() {
-   	 location.reload(); // Reloads the page to prompt the password again
-	}
+        // Restore the previous scroll position
+        window.scrollTo(0, savedScrollPosition);
+    }
+    
+    function refreshPage() {
+        location.reload(); // Reloads the page to prompt the password again
+    }
 </script>
 </html>
