@@ -239,10 +239,17 @@
     }
 
     function closeViewer(event) {
-       if (event) event.preventDefault(); // Prevent default button behavior
-	    document.getElementById('viewer').style.display = 'none'; // Hide the viewer
-	    document.getElementById('gallery').style.display = 'block'; // Show the gallery
-    }
+       if (event) event.preventDefault(); // Prevent default behavior
+       const viewer = document.getElementById('viewer');
+       const gallery = document.getElementById('gallery');
+
+    viewer.style.display = 'none'; // Hide the viewer
+    gallery.style.display = 'block'; // Show the gallery
+
+    // Ensure no unintended animations or resets occur
+    const viewerContent = document.getElementById('viewer-content');
+    viewerContent.innerHTML = ''; // Clear viewer content to reset state
+}
 	
 	function refreshPage() {
    	 document.getElementById('viewer').style.display = 'none';
