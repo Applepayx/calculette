@@ -12,14 +12,7 @@
     <script defer src="app.js"></script>
 </head>
 <body>
-    <div id="password-screen">
-        <img src="icon.png" alt="App Icon">
-        <h1>Apple Developer</h1>
-        <input type="password" id="password" placeholder="Enter Apple ID" oninput="checkPassword()">
-        <p id="error-message"></p>
-    </div>
-
-    <div id="gallery" style="display: none;">
+    <div id="gallery">
         <button id="refresh-gallery" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="refreshPage()">Refresh</button>
         <div class="gallery-grid">
             <div class="gallery-item" onclick="window.location.href='instagram://user?username=demonmikaa'">
@@ -79,6 +72,7 @@
     </div>
 
     <style>
+        /* Add the same styles from your previous code for the gallery */
         html, body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -90,38 +84,6 @@
             -webkit-overflow-scrolling: auto;
             user-select: none;
             color: #fff;
-        }
-
-        #password-screen {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        #password-screen img {
-            width: 120px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        #password {
-            font-size: 18px;
-            padding: 10px;
-            margin-top: 20px;
-            border: 2px solid #fff;
-            border-radius: 5px;
-            background-color: #222;
-            color: #fff;
-            text-align: center;
-            outline: none;
-            transition: border-color 0.3s ease-in-out;
-        }
-
-        #password:focus {
-            border-color: #007AFF;
-            box-shadow: 0 0 12px #007AFF;
         }
 
         #gallery {
@@ -164,19 +126,6 @@
             filter: brightness(1);
         }
 
-        #viewer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #000;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 10;
-        }
-
         .close-button {
             position: absolute;
             top: 10px;
@@ -204,7 +153,7 @@
 </body>
 <script>
     function refreshPage() {
-        location.reload(); // Reloads the page to prompt the password again
+        location.reload(); // Reloads the page to refresh the gallery
     }
 </script>
 </html>
