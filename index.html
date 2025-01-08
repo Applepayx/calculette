@@ -142,7 +142,7 @@
             border-radius: 5px;
             transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
             cursor: pointer;
-            filter: brightness(0.8);
+            filter: brightness(1);
             text-decoration: none;
         }
 
@@ -245,7 +245,8 @@
     }
 	
 	function refreshPage() {
-   	 location.reload(); // Reloads the page to prompt the password again
+   	 document.getElementById('viewer').style.display = 'none';
+         document.getElementById('gallery').style.display = 'block';
 	}
 </script>
 </html>
