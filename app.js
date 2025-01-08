@@ -6,7 +6,6 @@ document.addEventListener('visibilitychange', () => {
 });
 
 function promptPasswordAgain() {
-    // Reset the password input field and error message
     const passwordInput = document.getElementById('password');
     const errorMessage = document.getElementById('error-message');
 
@@ -17,8 +16,10 @@ function promptPasswordAgain() {
     document.getElementById('password-screen').style.display = 'flex';
     document.getElementById('gallery').style.display = 'none';
 
-    // Automatically focus on the password input field
-    passwordInput.focus();
+    // Small delay to ensure the element is visible before focusing
+    setTimeout(() => {
+        passwordInput.focus();
+    }, 300);
 }
 
 function checkPassword() {
