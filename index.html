@@ -239,9 +239,10 @@
         document.getElementById('viewer').style.display = 'flex';
     }
 
-    function closeViewer() {
-        document.getElementById('viewer').style.display = 'none';
-        document.getElementById('gallery').style.display = 'block';
+    function closeViewer(event) {
+       if (event) event.preventDefault(); // Prevent default button behavior
+	    document.getElementById('viewer').style.display = 'none'; // Hide the viewer
+	    document.getElementById('gallery').style.display = 'block'; // Show the gallery
     }
 	
 	function refreshPage() {
