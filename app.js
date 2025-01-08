@@ -16,6 +16,9 @@ function promptPasswordAgain() {
     // Show the password screen and hide the gallery
     document.getElementById('password-screen').style.display = 'flex';
     document.getElementById('gallery').style.display = 'none';
+
+    // Automatically focus on the password input field
+    passwordInput.focus();
 }
 
 function checkPassword() {
