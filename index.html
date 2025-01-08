@@ -198,51 +198,41 @@
     </style>
 </body>
 <script>
-    function openViewer(src) {
-        const viewerContent = document.getElementById('viewer-content');
-        viewerContent.innerHTML = '';
+    let savedScrollPosition = 0; // Variable to store scroll position
 
-        if (src.endsWith('.mp4')) {
-            const video = document.createElement('video');
-            video.src = src;
-            video.controls = true;
-            video.autoplay = true;
-            viewerContent.appendChild(video);
-        } else {
-	const img = document.createElement('img');
-	img.src = src;
-	img.style.objectFit = 'contain';
-	img.style.maxWidth = '100%';
-	img.style.maxHeight = '100%';
-	img.style.transition = 'transform 0.3s ease'; // Add smooth zoom transition
-	img.style.cursor = 'zoom-in'; // Indicate zoom-in on hover
-	
-	let isZoomed = false; // Track zoom state
-	
-	// Add double-click event listener for zoom functionality
-	img.addEventListener('dblclick', () => {
-	    if (!isZoomed) {
-	        img.style.transform = 'scale(2)'; // Zoom in
-	        img.style.cursor = 'zoom-out'; // Indicate zoom-out on hover
-	        isZoomed = true;
-	    } else {
-	        img.style.transform = 'scale(1)'; // Zoom out
-	        img.style.cursor = 'zoom-in'; // Indicate zoom-in on hover
-	        isZoomed = false;
-	    }
-	});
-	
-	viewerContent.appendChild(img);
-        }
+function openViewer(src) {
+    const viewerContent = document.getElementById('viewer-content');
+    viewerContent.innerHTML = '';
 
-        document.getElementById('gallery').style.display = 'none';
-        document.getElementById('viewer').style.display = 'flex';
+    // Save the current scroll position
+    savedScrollPosition = window.scrollY;
+
+    if (src.endsWith('.mp4')) {
+        const video = document.createElement('video');
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        viewerContent.appendChild(video);
+    } else {
+        const img = document.createElement('img');
+        img.src = src;
+        img.style.objectFit = 'contain';
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+        viewerContent.appendChild(img);
     }
 
-    function closeViewer() {
-        document.getElementById('viewer').style.display = 'none';
-        document.getElementById('gallery').style.display = 'block';
-    }
+    document.getElementById('gallery').style.display = 'none';
+    document.getElementById('viewer').style.display = 'flex';
+}
+
+function closeViewer() {
+    document.getElementById('viewer').style.display = 'none';
+    document.getElementById('gallery').style.display = 'block';
+
+    // Restore the previous scroll position
+    window.scrollTo(0, savedScrollPosition);
+}
 	
 	function refreshPage() {
    	 location.reload(); // Reloads the page to prompt the password again
