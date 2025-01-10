@@ -263,16 +263,47 @@
             clearDisplay();
         });
 
-        // Zoom functionality for gallery
-        let zoomLevel = 1;
-        document.getElementById('gallery-screen').addEventListener('wheel', function (event) {
-            if (event.deltaY > 0) {
-                zoomLevel = Math.max(1, zoomLevel - 0.1); // Zoom out
-            } else {
-                zoomLevel = Math.min(2, zoomLevel + 0.1); // Zoom in
-            }
-            this.style.transform = `scale(${zoomLevel})`;
-        });
+		// Zoom functionality for gallery
+		let zoomLevel = 1;
+		let initialDistance = null;
+
+		function calculateDistance(touches) {
+			const dx = touches[0].pageX - touches[1].pageX;
+			const dy = touches[0].pageY - touches[1].pageY;
+			return Math.sqrt(dx * dx + dy * dy);
+		}
+
+		document.getElementById('gallery-screen').addEventListener('touchstart', function (event) {
+			if (event.touches.length === 2) {
+				// Two-finger touch
+				initialDistance = calculateDistance(event.touches);
+			}
+		});
+
+		document.getElementById('gallery-screen').addEventListener('touchmove', function (event) {
+			if (event.touches.length === 2 && initialDistance) {
+				const currentDistance = calculateDistance(event.touches);
+				const scaleChange = currentDistance / initialDistance;
+
+				// Update zoom level, constrain between 1 and 2
+				zoomLevel = Math.min(2, Math.max(1, zoomLevel * scaleChange));
+
+				// Apply the zoom
+				this.style.transform = `scale(${zoomLevel})`;
+
+				// Update initial distance for the next calculation
+				initialDistance = currentDistance;
+
+				// Prevent default to avoid scrolling
+				event.preventDefault();
+			}
+		});
+
+		document.getElementById('gallery-screen').addEventListener('touchend', function () {
+			// Reset initial distance when touch ends
+			initialDistance = null;
+		});
+
     </script>
 </body>
 </html>
