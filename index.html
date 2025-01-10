@@ -47,9 +47,9 @@
 
         .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 buttons per row */
-            grid-auto-rows: 1fr; /* Ensures grid cells are square */
-            gap: 10px; /* Space between buttons */
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 1fr;
+            gap: 10px;
             height: 80%;
             padding: 10px 0;
         }
@@ -57,9 +57,9 @@
         button {
             background: #333;
             border: none;
-            border-radius: 50%; /* Makes buttons circular */
-            aspect-ratio: 1; /* Ensures width and height are equal */
-            font-size: 1.5em; /* Text size for button labels */
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5em;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -77,13 +77,12 @@
         }
 
         button:active {
-            transform: scale(0.95); /* Adds a click effect */
+            transform: scale(0.95);
         }
 
         .button-0 {
-            grid-column: span 2; /* Spans 2 columns */
-            aspect-ratio: unset; /* Removes the circular aspect ratio */
-            border-radius: 50px; /* Gives the "0" button a pill shape */
+            grid-column: span 2;
+            border-radius: 50px;
         }
     </style>
 </head>
