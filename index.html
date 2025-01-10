@@ -18,14 +18,16 @@
             height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: white;
+            overflow: hidden; /* Prevents scrolling */
         }
 
         .calculator {
             display: flex;
             flex-direction: column;
-            width: 100%;
-            max-width: 390px; /* Matches iPhone 13 width */
-            height: 100%;
+            width: 100%; /* Full screen width */
+            max-width: 100vw; /* Prevent overflow */
+            height: 100%; /* Full screen height */
+            max-height: 844px; /* Matches iPhone 13 height */
             padding: 0;
             box-sizing: border-box;
         }
@@ -36,7 +38,7 @@
             text-align: right;
             padding: 20px;
             font-size: 3.5em;
-            height: 20%; /* Matches iOS display size */
+            height: 20%; /* 20% of calculator height */
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -44,11 +46,11 @@
 
         .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
             grid-auto-rows: 1fr; /* Ensures buttons are square */
-            gap: 8px; /* Matches spacing between buttons */
-            height: 80%; /* Matches iOS button layout */
-            padding: 8px;
+            gap: 6px; /* Reduced spacing to fit buttons perfectly */
+            height: 80%; /* 80% of calculator height */
+            padding: 6px; /* Reduced padding */
         }
 
         button {
