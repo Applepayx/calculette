@@ -24,10 +24,10 @@
         .calculator {
             display: flex;
             flex-direction: column;
-            width: 100%; /* Full screen width */
-            max-width: 100vw; /* Prevent overflow */
-            height: 100%; /* Full screen height */
-            max-height: 100vh; /* Prevent overflow */
+            width: 100%;
+            max-width: 390px; /* Matches iPhone 13 width */
+            height: 100%;
+            max-height: 844px; /* Matches iPhone 13 height */
             padding: 0;
             box-sizing: border-box;
         }
@@ -36,9 +36,9 @@
             background: black;
             color: white;
             text-align: right;
-            padding: 15px; /* Adjusted padding to fit screen */
-            font-size: 3.2em; /* Slightly smaller font size */
-            height: 20%; /* 20% of calculator height */
+            padding: 10px;
+            font-size: 3em; /* Slightly smaller */
+            height: 20%;
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -46,35 +46,35 @@
 
         .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 1fr; /* Ensures buttons are square */
-            gap: 5px; /* Reduced spacing between buttons */
-            height: 80%; /* 80% of calculator height */
-            padding: 5px; /* Reduced padding */
+            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+            grid-auto-rows: calc((100vh - 20%) / 6); /* Smaller buttons to fit screen */
+            gap: 3px; /* Reduced gap */
+            height: 80%;
+            padding: 5px;
         }
 
         button {
-            background: #333; /* Matches iOS button color */
+            background: #333;
             border: none;
-            border-radius: 50%; /* Makes buttons perfectly round */
-            aspect-ratio: 1; /* Ensures buttons have equal width and height */
-            font-size: 1.4em; /* Slightly smaller font size */
+            border-radius: 50%; /* Ensures buttons are circular */
+            aspect-ratio: 1; /* Maintains circular aspect ratio */
+            font-size: 1.4em; /* Smaller button text */
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white; /* Ensures text color is white */
+            color: white;
             transition: background 0.3s ease, transform 0.1s ease;
         }
 
         button.operator {
-            background: #ff9500; /* Matches iOS orange buttons */
-            color: white; /* Text color for operators */
+            background: #ff9500;
+            color: white;
         }
 
         button.function {
-            background: #a6a6a6; /* Matches iOS light gray buttons */
-            color: black; /* Text color for function buttons */
+            background: #a6a6a6;
+            color: black;
         }
 
         button:active {
@@ -82,8 +82,8 @@
         }
 
         .button-0 {
-            grid-column: span 2; /* Spans two columns like iOS "0" button */
-            border-radius: 50px; /* Makes "0" button pill-shaped */
+            grid-column: span 2; /* Spans two columns for "0" button */
+            border-radius: 50px; /* Makes the "0" button pill-shaped */
             aspect-ratio: unset; /* Removes circular aspect ratio for "0" */
         }
     </style>
