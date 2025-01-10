@@ -1,141 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <title>iOS Calculator PWA</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: black;
-      color: white;
-      height: 100vh;
-      overflow: hidden;
-      -webkit-user-select: none; /* Disable text selection for iOS Safari */
-      -moz-user-select: none;    /* Disable text selection for Firefox */
-      -ms-user-select: none;     /* Disable text selection for IE */
-      user-select: none;         /* Disable text selection for modern browsers */
-    }
-    .calculator {
-      width: 320px;
-      border-radius: 10px;
-      background: black;
-    }
-    .display {
-      background: black;
-      color: white;
-      text-align: right;
-      padding: 20px;
-      font-size: 2.5em;
-      overflow-x: auto;
-    }
-    .buttons {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 5px;
-      padding: 10px;
-    }
-    button {
-      background: #333;
-      border: none;
-      border-radius: 50%;
-      color: white;
-      font-size: 1.5em;
-      padding: 20px;
-      cursor: pointer;
-    }
-    button.operator {
-      background: orange;
-    }
-    button:active {
-      background: #555;
-    }
-    .button-0 {
-      grid-column: span 2;
-      border-radius: 30px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Calculator">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <title>Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+        }
+
+        .display {
+            background: black;
+            color: white;
+            text-align: right;
+            padding: 20px;
+            font-size: 2.5em;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-bottom: 2px solid #333;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 1fr;
+            gap: 5px;
+            flex: 4;
+            padding: 5px;
+        }
+
+        button {
+            background: #333;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        button:active {
+            background: #555;
+        }
+
+        button.operator {
+            background: orange;
+        }
+
+        .button-0 {
+            grid-column: span 2;
+            border-radius: 25px;
+        }
+    </style>
 </head>
 <body>
-  <div class="calculator">
-    <div class="display" id="display">0</div>
-    <div class="buttons">
-      <button onclick="clearDisplay()">AC</button>
-      <button onclick="pressKey('+/-')">+/-</button>
-      <button onclick="pressKey('%')">%</button>
-      <button class="operator" onclick="pressKey('/')">÷</button>
-      <button onclick="pressKey('7')">7</button>
-      <button onclick="pressKey('8')">8</button>
-      <button onclick="pressKey('9')">9</button>
-      <button class="operator" onclick="pressKey('*')">×</button>
-      <button onclick="pressKey('4')">4</button>
-      <button onclick="pressKey('5')">5</button>
-      <button onclick="pressKey('6')">6</button>
-      <button class="operator" onclick="pressKey('-')">-</button>
-      <button onclick="pressKey('1')">1</button>
-      <button onclick="pressKey('2')">2</button>
-      <button onclick="pressKey('3')">3</button>
-      <button class="operator" onclick="pressKey('+')">+</button>
-      <button class="button-0" onclick="pressKey('0')">0</button>
-      <button onclick="pressKey('.')">.</button>
-      <button class="operator" onclick="calculate()">=</button>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button onclick="clearDisplay()">AC</button>
+            <button onclick="pressKey('+/-')">+/-</button>
+            <button onclick="pressKey('%')">%</button>
+            <button class="operator" onclick="pressKey('/')">÷</button>
+            <button onclick="pressKey('7')">7</button>
+            <button onclick="pressKey('8')">8</button>
+            <button onclick="pressKey('9')">9</button>
+            <button class="operator" onclick="pressKey('*')">×</button>
+            <button onclick="pressKey('4')">4</button>
+            <button onclick="pressKey('5')">5</button>
+            <button onclick="pressKey('6')">6</button>
+            <button class="operator" onclick="pressKey('-')">-</button>
+            <button onclick="pressKey('1')">1</button>
+            <button onclick="pressKey('2')">2</button>
+            <button onclick="pressKey('3')">3</button>
+            <button class="operator" onclick="pressKey('+')">+</button>
+            <button class="button-0" onclick="pressKey('0')">0</button>
+            <button onclick="pressKey('.')">.</button>
+            <button class="operator" onclick="calculate()">=</button>
+        </div>
     </div>
-  </div>
-  <script>
-    let display = document.getElementById('display');
-    let currentInput = '';
-    let operator = null;
-    let previousInput = '';
-    const password1 = "109"; // Opens index.html
-    const password2 = "108"; // Opens insta.html
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '';
+        let operator = null;
+        let previousInput = '';
+        const password1 = "109"; // Redirect to gallery (index.html)
+        const password2 = "108"; // Redirect to insta.html
 
-    function pressKey(key) {
-      if (['+', '-', '*', '/'].includes(key)) {
-        if (currentInput) {
-          operator = key;
-          previousInput = currentInput;
-          currentInput = '';
+        function pressKey(key) {
+            if (['+', '-', '*', '/'].includes(key)) {
+                if (currentInput) {
+                    operator = key;
+                    previousInput = currentInput;
+                    currentInput = '';
+                }
+            } else {
+                if (currentInput === '0' && key !== '.') {
+                    currentInput = '';
+                }
+                currentInput += key;
+            }
+            display.textContent = currentInput || previousInput || '0';
         }
-      } else {
-        if (currentInput === '0' && key !== '.') {
-          currentInput = '';
+
+        function clearDisplay() {
+            currentInput = '';
+            previousInput = '';
+            operator = null;
+            display.textContent = '0';
         }
-        currentInput += key;
-      }
-      display.textContent = currentInput || previousInput || '0';
-    }
 
-    function clearDisplay() {
-      currentInput = '';
-      previousInput = '';
-      operator = null;
-      display.textContent = '0';
-    }
-
-    function calculate() {
-      if (currentInput === password1) {
-        // Redirect to index.html
-        window.location.href = "gallery.html";
-      } else if (currentInput === password2) {
-        // Redirect to insta.html
-        window.location.href = "insta.html";
-      } else if (operator && previousInput) {
-        let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
-        currentInput = result.toString();
-        previousInput = '';
-        operator = null;
-        display.textContent = currentInput;
-      } else {
-        alert("Incorrect Code or Regular Calculation.");
-        display.textContent = currentInput || previousInput || '0';
-      }
-    }
-  </script>
+        function calculate() {
+            if (currentInput === password1) {
+                window.location.href = "index.html"; // Open index.html
+            } else if (currentInput === password2) {
+                window.location.href = "insta.html"; // Open insta.html
+            } else if (operator && previousInput) {
+                let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
+                currentInput = result.toString();
+                previousInput = '';
+                operator = null;
+                display.textContent = currentInput;
+            } else {
+                display.textContent = "Error";
+            }
+        }
+    </script>
 </body>
 </html>
