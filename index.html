@@ -92,8 +92,9 @@
             width: 100%;
             height: 100vh;
             background-color: black;
-            overflow: auto;
-            color: white;
+            overflow: scroll; /* Allow scrolling for zoomed content */
+            transform-origin: center; /* Set zoom transform point */
+            transition: transform 0.3s ease-in-out;
         }
 
         .gallery-grid {
@@ -116,7 +117,6 @@
             width: 100%;
             height: auto;
             border-radius: 5px;
-            transform-origin: center;
         }
 
         .gallery-item:hover {
@@ -157,22 +157,51 @@
     <!-- Gallery Screen -->
     <div id="gallery-screen" class="screen gallery" style="display: none;">
         <div class="gallery-grid">
-            <div class="gallery-item">
-                <video autoplay muted loop playsinline controls>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=demonmikaa'">
+                <video autoplay muted loop playsinline>
                     <source src="videos/video1.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="gallery-item">
-                <video autoplay muted loop playsinline controls>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=lisbethjohnson2'">
+                <video autoplay muted loop playsinline>
                     <source src="videos/video2.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="gallery-item">
-                <video autoplay muted loop playsinline controls>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=itsfionaharriss'">
+                <video autoplay muted loop playsinline>
                     <source src="videos/video3.mp4" type="video/mp4">
                 </video>
             </div>
-            <!-- Add more gallery items as needed -->
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=anastais.me'">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/video4.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=diana.catalina08'">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/video5.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=sandyd_____'">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/video6.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=bambidoexo'">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/video7.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=jettsojuicy'">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/video8.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=secretgeekygirlfriend'">
+                <video autoplay muted loop playsinline>
+                    <source src="videos/video9.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
     </div>
 
@@ -232,6 +261,17 @@
             document.getElementById('gallery-screen').style.display = 'none';
             document.getElementById('calculator-screen').style.display = 'flex';
             clearDisplay();
+        });
+
+        // Zoom functionality for gallery
+        let zoomLevel = 1;
+        document.getElementById('gallery-screen').addEventListener('wheel', function (event) {
+            if (event.deltaY > 0) {
+                zoomLevel = Math.max(1, zoomLevel - 0.1); // Zoom out
+            } else {
+                zoomLevel = Math.min(2, zoomLevel + 0.1); // Zoom in
+            }
+            this.style.transform = `scale(${zoomLevel})`;
         });
     </script>
 </body>
