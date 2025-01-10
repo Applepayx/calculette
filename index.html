@@ -124,44 +124,92 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         }
 
-        #gallery2 {
-            margin-top: 20px;
-            animation: fadeIn 1s ease-in-out;
-        }
+	#gallery2-screen {
+	    margin-top: 20px;
+	    animation: fadeIn 1s ease-in-out;
+	    overflow-y: auto; /* Enable scrolling for gallery2 */
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	    justify-content: flex-start;
+	    height: 100vh; /* Ensure it takes up full viewport height */
+	    box-sizing: border-box;
+	}
+	
+	@keyframes fadeIn {
+	    from { opacity: 0; }
+	    to { opacity: 1; }
+	}
+	
+	.gallery2-grid {
+	    display: grid;
+	    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	    gap: 10px;
+	    padding: 10px;
+	    width: 100%;
+	    box-sizing: border-box;
+	}
+	
+	.gallery2-item {
+	    width: 100%;
+	    height: auto;
+	    border: 1px solid #fff;
+	    border-radius: 5px;
+	    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+	    cursor: pointer;
+	    filter: brightness(1);
+	    text-decoration: none;
+	}
+	
+	.gallery2-item img {
+	    width: 100%;
+	    height: auto;
+	    border-radius: 5px;
+	}
+	
+	.gallery2-item:hover {
+	    transform: scale(1.1);
+	    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+	    filter: brightness(1.2);
+	}
+	
+	#viewer {
+	    display: none; /* Hidden by default */
+	    justify-content: center;
+	    align-items: center;
+	    height: 100vh;
+	    background-color: #000;
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    z-index: 10;
+	}
+	
+	#viewer img, #viewer video {
+	    max-width: 90%;
+	    max-height: 90%;
+	    object-fit: contain;
+	}
+	
+	.close-button {
+	    position: absolute;
+	    top: 10px;
+	    right: 10px;
+	    background-color: transparent;
+	    color: #fff;
+	    border: none;
+	    font-size: 20px;
+	    cursor: pointer;
+	    padding: 5px;
+	    border-radius: 50%;
+	    transition: background-color 0.3s ease-in-out;
+	}
+	
+	.close-button:hover {
+	    background-color: rgba(255, 255, 255, 0.2);
+	}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .gallery2-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            padding: 10px;
-        }
-
-        .gallery2-item {
-            width: 100%;
-            height: auto;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
-            cursor: pointer;
-            filter: brightness(1);
-        }
-
-        .gallery2-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .gallery2-item:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-            filter: brightness(1.2);
-        }
     </style>
 </head>
 <body>
@@ -292,7 +340,10 @@
 			</div>
 		</div>
 	</div>
-
+	<div id="viewer" style="display: none;">
+		<button class="close-button" onclick="closeViewer()">X</button>
+		<div id="viewer-content"></div>
+	</div>
 
     <script>
         let display = document.getElementById('display');
@@ -348,6 +399,39 @@
 
             document.getElementById(galleryId).style.display = 'flex';
         }
+	let savedScrollPosition2 = 0;
+
+	function openViewer(src) {
+		const viewer = document.getElementById('viewer');
+		const viewerContent = viewer.querySelector('#viewer-content');
+		viewerContent.innerHTML = ''; // Clear existing content
+	
+		savedScrollPosition2 = window.scrollY;
+	
+		if (src.endsWith('.mp4')) {
+			const video = document.createElement('video');
+			video.src = src;
+			video.controls = true;
+			video.autoplay = true;
+			viewerContent.appendChild(video);
+		} else {
+			const img = document.createElement('img');
+			img.src = src;
+			viewerContent.appendChild(img);
+		}
+	
+		document.getElementById('gallery2-screen').style.display = 'none';
+		viewer.style.display = 'flex';
+	}
+	
+	function closeViewer() {
+		const viewer = document.getElementById('viewer');
+	
+		viewer.style.display = 'none';
+		document.getElementById('gallery2-screen').style.display = 'flex';
+	
+		window.scrollTo(0, savedScrollPosition2);
+	}
 
         window.addEventListener('focus', () => {
             document.getElementById('gallery1-screen').style.display = 'none';
