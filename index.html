@@ -7,61 +7,69 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Calculator">
     <meta name="theme-color" content="#000000">
-    <title>Calculator</title>
+    <title>Calculator with Gallery</title>
     <style>
         body {
             margin: 0;
             background-color: black;
-            display: flex;
-            justify-content: flex-start; /* Alignement à gauche */
-            align-items: center;
-            height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: white;
             overflow: hidden;
         }
 
-        .calculator {
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .active {
             display: flex;
+        }
+
+        .calculator {
             flex-direction: column;
-            width: 96vw; 
-            height: 96vh;
-            padding: 2vh; 
-            box-sizing: border-box;
+            justify-content: center;
+            align-items: flex-end;
+            width: 360px;
+            height: auto;
+            margin: auto;
+            padding: 20px;
+            border-radius: 20px;
+            background-color: #000;
         }
 
         .display {
-            background: black;
             color: white;
             text-align: right;
-            padding: 2vh 2vw;
+            padding: 10px;
             font-size: 2.5em;
-            height: 18vh;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
+            height: 80px;
+            border: none;
+            margin-bottom: 20px;
+            overflow-x: hidden;
         }
 
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: calc((96vh - 18vh - 4vh) / 6);
-            gap: 1.8vh; 
-            height: 80vh;
+            gap: 10px;
         }
 
         button {
-            background: #333;
+            background: #505050;
             border: none;
             border-radius: 50%;
-            aspect-ratio: 1;
-            font-size: 1.5em; 
+            font-size: 1.5em;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            transition: background 0.3s ease, transform 0.1s ease;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            width: 72px;
+            height: 72px;
         }
 
         button.operator {
@@ -70,7 +78,7 @@
         }
 
         button.function {
-            background: #a6a6a6; 
+            background: #a6a6a6;
             color: black;
         }
 
@@ -79,37 +87,130 @@
         }
 
         .button-0 {
-            grid-column: span 2; 
-            border-radius: 40px; 
-            aspect-ratio: unset;
+            grid-column: span 2;
+            border-radius: 30px;
+            width: auto;
+        }
+
+        .gallery {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            overflow: auto;
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: auto;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="display" id="display">0</div>
-        <div class="buttons">
-            <button class="function" onclick="clearDisplay()">AC</button>
-            <button class="function" onclick="pressKey('+/-')">+/-</button>
-            <button class="function" onclick="pressKey('%')">%</button>
-            <button class="operator" onclick="pressKey('/')">÷</button>
-            <button onclick="pressKey('7')">7</button>
-            <button onclick="pressKey('8')">8</button>
-            <button onclick="pressKey('9')">9</button>
-            <button class="operator" onclick="pressKey('*')">×</button>
-            <button onclick="pressKey('4')">4</button>
-            <button onclick="pressKey('5')">5</button>
-            <button onclick="pressKey('6')">6</button>
-            <button class="operator" onclick="pressKey('-')">−</button>
-            <button onclick="pressKey('1')">1</button>
-            <button onclick="pressKey('2')">2</button>
-            <button onclick="pressKey('3')">3</button>
-            <button class="operator" onclick="pressKey('+')">+</button>
-            <button class="button-0" onclick="pressKey('0')">0</button>
-            <button onclick="pressKey('.')">.</button>
-            <button class="operator" onclick="calculate()">=</button>
+    <!-- Calculator Screen -->
+    <div id="calculator-screen" class="screen active">
+        <div class="calculator">
+            <div class="display" id="display">0</div>
+            <div class="buttons">
+                <button class="function" onclick="clearDisplay()">AC</button>
+                <button class="function" onclick="pressKey('+/-')">+/-</button>
+                <button class="function" onclick="pressKey('%')">%</button>
+                <button class="operator" onclick="pressKey('/')">÷</button>
+                <button onclick="pressKey('7')">7</button>
+                <button onclick="pressKey('8')">8</button>
+                <button onclick="pressKey('9')">9</button>
+                <button class="operator" onclick="pressKey('*')">×</button>
+                <button onclick="pressKey('4')">4</button>
+                <button onclick="pressKey('5')">5</button>
+                <button onclick="pressKey('6')">6</button>
+                <button class="operator" onclick="pressKey('-')">−</button>
+                <button onclick="pressKey('1')">1</button>
+                <button onclick="pressKey('2')">2</button>
+                <button onclick="pressKey('3')">3</button>
+                <button class="operator" onclick="pressKey('+')">+</button>
+                <button class="button-0" onclick="pressKey('0')">0</button>
+                <button onclick="pressKey('.')">.</button>
+                <button class="operator" onclick="calculate()">=</button>
+            </div>
         </div>
     </div>
+
+    <!-- Gallery Screen -->
+    <div id="gallery-screen" class="screen gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=demonmikaa'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=lisbethjohnson2'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=itsfionaharriss'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video3.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=anastais.me'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video4.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=diana.catalina08'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video5.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=sandyd_____'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video6.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=bambidoexo'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video7.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=jettsojuicy'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video8.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item" onclick="window.location.href='instagram://user?username=secretgeekygirlfriend'">
+                <video autoplay muted loop playsinline>
+                    <source src="photos/video9.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
     <script>
         let display = document.getElementById('display');
         let currentInput = '';
@@ -143,7 +244,7 @@
 
         function calculate() {
             if (currentInput === password1) {
-                alert("Load Gallery");
+                showGallery();
             } else if (currentInput === password2) {
                 alert("Load Instagram");
             } else if (operator && previousInput) {
@@ -156,14 +257,11 @@
                 display.textContent = "Error";
             }
         }
-    </script>
-    <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                var viewport = document.querySelector('meta[name="viewport"]');
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-            }, 300); 
-        });
+
+        function showGallery() {
+            document.getElementById('calculator-screen').classList.remove('active');
+            document.getElementById('gallery-screen').classList.add('active');
+        }
     </script>
 </body>
 </html>
