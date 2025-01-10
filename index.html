@@ -19,16 +19,16 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            color: white;
             font-family: Arial, sans-serif;
+            color: white;
         }
 
         .calculator {
             display: flex;
             flex-direction: column;
-            width: 100%;
-            max-width: 500px;
-            height: 100%;
+            width: 90%; /* Adjust the width to fit nicely */
+            max-width: 400px; /* Limit the width for larger screens */
+            aspect-ratio: 3 / 4; /* Ensure proper proportions */
         }
 
         .display {
@@ -47,26 +47,27 @@
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 1fr;
-            gap: 5px;
-            flex: 4;
-            padding: 5px;
+            grid-template-rows: repeat(5, 1fr); /* Make buttons proportionally fit */
+            gap: 10px;
+            flex: 3;
+            padding: 10px;
         }
 
         button {
             background: #333;
             border: none;
-            border-radius: 50%;
+            border-radius: 50%; /* Round buttons */
             color: white;
-            font-size: 1.5em;
+            font-size: 1.2em; /* Slightly smaller font */
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.1s ease;
         }
 
         button:active {
             background: #555;
+            transform: scale(0.95); /* Slight click effect */
         }
 
         button.operator {
@@ -75,7 +76,7 @@
 
         .button-0 {
             grid-column: span 2;
-            border-radius: 25px;
+            border-radius: 25px; /* Slightly rounded for larger button */
         }
     </style>
 </head>
@@ -137,7 +138,7 @@
 
         function calculate() {
             if (currentInput === password1) {
-                window.location.href = "index.html"; // Open index.html
+                window.location.href = "gallery.html"; // Open index.html
             } else if (currentInput === password2) {
                 window.location.href = "insta.html"; // Open insta.html
             } else if (operator && previousInput) {
