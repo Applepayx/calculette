@@ -27,8 +27,10 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            max-width: 400px;
-            height: 90vh; /* Adjust height to mimic iOS */
+            max-width: 380px;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
         }
 
         .display {
@@ -49,7 +51,7 @@
             grid-auto-rows: 1fr;
             gap: 10px;
             height: 80%;
-            padding: 10px;
+            padding: 10px 0;
         }
 
         button {
@@ -57,7 +59,7 @@
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -114,8 +116,8 @@
         let currentInput = '';
         let operator = null;
         let previousInput = '';
-        const password1 = "109"; // Show gallery (index.html content)
-        const password2 = "108"; // Show Instagram page content
+        const password1 = "109"; // Show gallery content
+        const password2 = "108"; // Show Instagram content
 
         function pressKey(key) {
             if (['+', '-', '*', '/'].includes(key)) {
@@ -142,9 +144,9 @@
 
         function calculate() {
             if (currentInput === password1) {
-                loadPage("gallery"); // Load the gallery content
+                loadPage("gallery"); // Load gallery content
             } else if (currentInput === password2) {
-                loadPage("insta"); // Load the Instagram content
+                loadPage("insta"); // Load Instagram content
             } else if (operator && previousInput) {
                 let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
                 currentInput = result.toString();
@@ -162,7 +164,7 @@
                 calculator.innerHTML = `
                     <div style="text-align: center; margin-top: 20px;">
                         <h1 style="color: white;">Welcome to the Gallery</h1>
-                        <p style="color: gray;">Here you can explore photos and videos.</p>
+                        <p style="color: gray;">This is where gallery content would appear.</p>
                         <button onclick="goBack()" style="padding: 10px; font-size: 1em; background-color: #ff9500; border: none; color: white; border-radius: 5px; cursor: pointer;">Go Back</button>
                     </div>
                 `;
@@ -170,7 +172,7 @@
                 calculator.innerHTML = `
                     <div style="text-align: center; margin-top: 20px;">
                         <h1 style="color: white;">Welcome to Instagram</h1>
-                        <p style="color: gray;">This is where Instagram-like content would be shown.</p>
+                        <p style="color: gray;">This is where Instagram-like content would appear.</p>
                         <button onclick="goBack()" style="padding: 10px; font-size: 1em; background-color: #ff9500; border: none; color: white; border-radius: 5px; cursor: pointer;">Go Back</button>
                     </div>
                 `;
