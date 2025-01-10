@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Calculator">
@@ -18,7 +18,7 @@
             height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: white;
-            overflow: hidden; /* Prevents scrolling */
+            overflow: hidden; /* Prevent scrolling */
         }
 
         .calculator {
@@ -27,7 +27,7 @@
             width: 100%; /* Full screen width */
             max-width: 100vw; /* Prevent overflow */
             height: 100%; /* Full screen height */
-            max-height: 844px; /* Matches iPhone 13 height */
+            max-height: 100vh; /* Prevent overflow */
             padding: 0;
             box-sizing: border-box;
         }
@@ -36,8 +36,8 @@
             background: black;
             color: white;
             text-align: right;
-            padding: 20px;
-            font-size: 3.5em;
+            padding: 15px; /* Adjusted padding to fit screen */
+            font-size: 3.2em; /* Slightly smaller font size */
             height: 20%; /* 20% of calculator height */
             display: flex;
             align-items: center;
@@ -46,11 +46,11 @@
 
         .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+            grid-template-columns: repeat(4, 1fr);
             grid-auto-rows: 1fr; /* Ensures buttons are square */
-            gap: 6px; /* Reduced spacing to fit buttons perfectly */
+            gap: 5px; /* Reduced spacing between buttons */
             height: 80%; /* 80% of calculator height */
-            padding: 6px; /* Reduced padding */
+            padding: 5px; /* Reduced padding */
         }
 
         button {
@@ -58,7 +58,7 @@
             border: none;
             border-radius: 50%; /* Makes buttons perfectly round */
             aspect-ratio: 1; /* Ensures buttons have equal width and height */
-            font-size: 1.6em; /* Button text size */
+            font-size: 1.4em; /* Slightly smaller font size */
             font-weight: bold;
             display: flex;
             align-items: center;
