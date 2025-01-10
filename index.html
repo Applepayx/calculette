@@ -174,42 +174,37 @@
 	}
 	
 	#viewer {
-	    display: none; /* Hidden by default */
-	    justify-content: center;
-	    align-items: center;
-	    height: 100vh;
-	    background-color: #000;
-	    position: fixed;
-	    top: 0;
-	    left: 0;
-	    width: 100%;
-	    z-index: 10;
-	    overflow: hidden; /* Prevent scrolling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
 	}
 	
-	#viewer img, #viewer video {
-	    max-width: 100%;
-	    max-height: 100%;
-	    object-fit: contain;
-	    transition: transform 0.3s ease, all 0.3s ease;
-    	    cursor: grab; /* Indicate draggable content */
-	}
-	
-	#viewer img:active, #viewer video:active {
-    	cursor: grabbing; /* Grabbing effect */
 	
 	.close-button {
-	    position: absolute;
-	    top: 10px;
-	    right: 10px;
-	    background-color: transparent;
-	    color: #fff;
-	    border: none;
-	    font-size: 20px;
-	    cursor: pointer;
-	    padding: 5px;
-	    border-radius: 50%;
-	    transition: background-color 0.3s ease-in-out;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            color: #fff;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease-in-out;
 	}
 	
 	.close-button:hover {
@@ -406,10 +401,7 @@
             document.getElementById(galleryId).style.display = 'flex';
         }
 	let savedScrollPosition2 = 0;
-	let scale = 1; // Initial zoom level
-	let panX = 0, panY = 0; // Initial panning positions
-	let isDragging = false;
-	let startX, startY;
+
 
 	function openViewer(src) {
 		const viewer = document.getElementById('viewer');
@@ -427,6 +419,9 @@
 		} else {
 			const img = document.createElement('img');
 			img.src = src;
+			img.style.objectFit = 'contain';
+			img.style.maxWidth = '100%';
+			img.style.maxHeight = '100%';
 			viewerContent.appendChild(img);
 		}
 	
