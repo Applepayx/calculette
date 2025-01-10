@@ -18,16 +18,14 @@
             height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: white;
-            overflow: hidden; /* Prevents scrolling */
+            overflow: hidden; 
         }
 
         .calculator {
             display: flex;
             flex-direction: column;
             width: 100%;
-            max-width: 1170px; /* Reduced width */
             height: 100%;
-            max-height: 2532px; /* Reduced height to fit buttons perfectly */
             padding: 0;
             box-sizing: border-box;
         }
@@ -37,7 +35,7 @@
             color: white;
             text-align: right;
             padding: 15px;
-            font-size: 3em; /* Keeps text large and visible */
+            font-size: 3em; 
             height: 20%;
             display: flex;
             align-items: center;
@@ -46,19 +44,19 @@
 
         .buttons {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
-            grid-auto-rows: calc((100vh - 20%) / 6.5); /* Smaller button rows */
-            gap: 6px; /* Better spacing between buttons */
+            grid-template-columns: repeat(4, 1fr); 
+            grid-auto-rows: calc((100vh - 20%) / 6.5);
+            gap: 6px; 
             height: 80%;
-            padding: 8px; /* Adjusted padding for cleaner spacing */
+            padding: 8px; 
         }
 
         button {
             background: #333;
             border: none;
-            border-radius: 50%; /* Ensures buttons are circular */
-            aspect-ratio: 1; /* Keeps buttons perfectly circular */
-            font-size: 1.6em; /* Slightly reduced font size for smaller buttons */
+            border-radius: 50%;
+            aspect-ratio: 1;
+            font-size: 1.6em; 
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -68,23 +66,23 @@
         }
 
         button.operator {
-            background: #ff9500; /* Matches iOS calculator orange */
+            background: #ff9500;
             color: white;
         }
 
         button.function {
-            background: #a6a6a6; /* Matches iOS light gray buttons */
+            background: #a6a6a6; 
             color: black;
         }
 
         button:active {
-            transform: scale(0.9); /* Adds a subtle click effect */
+            transform: scale(0.9); 
         }
 
         .button-0 {
-            grid-column: span 2; /* Makes "0" span two columns */
-            border-radius: 50px; /* Pill-shaped for the "0" button */
-            aspect-ratio: unset; /* Removes circular aspect ratio for "0" */
+            grid-column: span 2; 
+            border-radius: 50px;
+            aspect-ratio: unset;
         }
     </style>
 </head>
