@@ -19,64 +19,68 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: white;
         }
 
         .calculator {
             display: flex;
             flex-direction: column;
-            width: 90%; /* Adjust the width to fit nicely */
-            max-width: 400px; /* Limit the width for larger screens */
-            aspect-ratio: 3 / 4; /* Ensure proper proportions */
+            width: 100%;
+            max-width: 400px;
+            height: 90vh; /* Adjust height to mimic iOS */
         }
 
         .display {
             background: black;
             color: white;
             text-align: right;
-            padding: 20px;
-            font-size: 2.5em;
-            flex: 1;
+            padding: 0 20px;
+            font-size: 3.5em;
+            height: 20%;
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            border-bottom: 2px solid #333;
         }
 
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(5, 1fr); /* Make buttons proportionally fit */
+            grid-auto-rows: 1fr;
             gap: 10px;
-            flex: 3;
+            height: 80%;
             padding: 10px;
         }
 
         button {
             background: #333;
             border: none;
-            border-radius: 50%; /* Round buttons */
+            border-radius: 50%;
             color: white;
-            font-size: 1.2em; /* Slightly smaller font */
+            font-size: 1.5em;
+            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background 0.3s ease, transform 0.1s ease;
         }
 
-        button:active {
-            background: #555;
-            transform: scale(0.95); /* Slight click effect */
+        button.operator {
+            background: #ff9500;
         }
 
-        button.operator {
-            background: orange;
+        button.function {
+            background: #a6a6a6;
+            color: black;
+        }
+
+        button:active {
+            transform: scale(0.95);
         }
 
         .button-0 {
             grid-column: span 2;
-            border-radius: 25px; /* Slightly rounded for larger button */
+            border-radius: 50px;
         }
     </style>
 </head>
@@ -84,9 +88,9 @@
     <div class="calculator">
         <div class="display" id="display">0</div>
         <div class="buttons">
-            <button onclick="clearDisplay()">AC</button>
-            <button onclick="pressKey('+/-')">+/-</button>
-            <button onclick="pressKey('%')">%</button>
+            <button class="function" onclick="clearDisplay()">AC</button>
+            <button class="function" onclick="pressKey('+/-')">+/-</button>
+            <button class="function" onclick="pressKey('%')">%</button>
             <button class="operator" onclick="pressKey('/')">÷</button>
             <button onclick="pressKey('7')">7</button>
             <button onclick="pressKey('8')">8</button>
@@ -95,7 +99,7 @@
             <button onclick="pressKey('4')">4</button>
             <button onclick="pressKey('5')">5</button>
             <button onclick="pressKey('6')">6</button>
-            <button class="operator" onclick="pressKey('-')">-</button>
+            <button class="operator" onclick="pressKey('-')">−</button>
             <button onclick="pressKey('1')">1</button>
             <button onclick="pressKey('2')">2</button>
             <button onclick="pressKey('3')">3</button>
@@ -110,8 +114,8 @@
         let currentInput = '';
         let operator = null;
         let previousInput = '';
-        const password1 = "109"; // Redirect to gallery (index.html)
-        const password2 = "108"; // Redirect to insta.html
+        const password1 = "109"; // Show gallery (index.html content)
+        const password2 = "108"; // Show Instagram page content
 
         function pressKey(key) {
             if (['+', '-', '*', '/'].includes(key)) {
@@ -138,9 +142,9 @@
 
         function calculate() {
             if (currentInput === password1) {
-                window.location.href = "gallery.html"; // Open index.html
+                loadPage("gallery"); // Load the gallery content
             } else if (currentInput === password2) {
-                window.location.href = "insta.html"; // Open insta.html
+                loadPage("insta"); // Load the Instagram content
             } else if (operator && previousInput) {
                 let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
                 currentInput = result.toString();
@@ -150,6 +154,31 @@
             } else {
                 display.textContent = "Error";
             }
+        }
+
+        function loadPage(page) {
+            const calculator = document.querySelector(".calculator");
+            if (page === "gallery") {
+                calculator.innerHTML = `
+                    <div style="text-align: center; margin-top: 20px;">
+                        <h1 style="color: white;">Welcome to the Gallery</h1>
+                        <p style="color: gray;">Here you can explore photos and videos.</p>
+                        <button onclick="goBack()" style="padding: 10px; font-size: 1em; background-color: #ff9500; border: none; color: white; border-radius: 5px; cursor: pointer;">Go Back</button>
+                    </div>
+                `;
+            } else if (page === "insta") {
+                calculator.innerHTML = `
+                    <div style="text-align: center; margin-top: 20px;">
+                        <h1 style="color: white;">Welcome to Instagram</h1>
+                        <p style="color: gray;">This is where Instagram-like content would be shown.</p>
+                        <button onclick="goBack()" style="padding: 10px; font-size: 1em; background-color: #ff9500; border: none; color: white; border-radius: 5px; cursor: pointer;">Go Back</button>
+                    </div>
+                `;
+            }
+        }
+
+        function goBack() {
+            location.reload(); // Reload the calculator
         }
     </script>
 </body>
