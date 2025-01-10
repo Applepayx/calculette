@@ -14,7 +14,7 @@
             background-color: black;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Move the calculator lower */
+            align-items: flex-end;
             height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: white;
@@ -46,7 +46,7 @@
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px; /* Adjust gap for better alignment */
+            gap: 10px;
         }
 
         button {
@@ -57,11 +57,11 @@
             font-weight: bold;
             display: flex;
             align-items: center;
-            justify-content: 	center;
+            justify-content: center;
             color: white;
             cursor: pointer;
             transition: background-color 0.2s, transform 0.1s;
-            width: 80px; /* Uniform button size */
+            width: 80px;
             height: 80px;
         }
 
@@ -82,29 +82,29 @@
         .button-0 {
             grid-column: span 2;
             border-radius: 30px;
-            width: auto; /* Ensure proper width for the "0" button */
+            width: auto;
         }
 
-        .gallery {
+        .gallery1 {
             flex-direction: column;
             align-items: center;
             text-align: center;
             width: 100%;
             height: 100vh;
             background-color: black;
-            overflow: scroll; /* Allow scrolling for zoomed content */
-            transform-origin: center; /* Set zoom transform point */
+            overflow: scroll;
+            transform-origin: center;
             transition: transform 0.3s ease-in-out;
         }
 
-        .gallery-grid {
+        .gallery1-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 10px;
             padding: 10px;
         }
 
-        .gallery-item {
+        .gallery1-item {
             width: 100%;
             height: auto;
             border: 1px solid #fff;
@@ -113,15 +113,54 @@
             cursor: pointer;
         }
 
-        .gallery-item video {
+        .gallery1-item video {
             width: 100%;
             height: auto;
             border-radius: 5px;
         }
 
-        .gallery-item:hover {
+        .gallery1-item:hover {
             transform: scale(1.1);
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        #gallery2 {
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .gallery2-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .gallery2-item {
+            width: 100%;
+            height: auto;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            cursor: pointer;
+            filter: brightness(1);
+        }
+
+        .gallery2-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .gallery2-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            filter: brightness(1.2);
         }
     </style>
 </head>
@@ -142,7 +181,7 @@
                 <button onclick="pressKey('4')">4</button>
                 <button onclick="pressKey('5')">5</button>
                 <button onclick="pressKey('6')">6</button>
-                <button class="operator" onclick="pressKey('-')">−</button>
+                <button class="operator" onclick="pressKey('-')">-</button>
                 <button onclick="pressKey('1')">1</button>
                 <button onclick="pressKey('2')">2</button>
                 <button onclick="pressKey('3')">3</button>
@@ -154,100 +193,105 @@
         </div>
     </div>
 
-    <!-- Gallery Screen -->
-    <div id="gallery-screen" class="screen gallery" style="display: none;">
-        <div class="gallery-grid">
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=demonmikaa'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video1.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=lisbethjohnson2'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video2.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=itsfionaharriss'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video3.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=anastais.me'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video4.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=diana.catalina08'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video5.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=sandyd_____'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video6.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=bambidoexo'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video7.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=jettsojuicy'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video8.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=secretgeekygirlfriend'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video9.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-    </div>
-    <!-- Second Gallery Screen -->
-    <div id="gallery-screen-2" class="screen gallery" style="display: none;">
-        <div class="gallery-grid">
-            <div class="gallery-item" onclick="openViewer('photos/Photo1.JPG')">
-                <img src="photos/Photo1.JPG" alt="Photo 1">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo2.JPG')">
-                <img src="photos/Photo2.JPG" alt="Photo 2">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo3.JPG')">
-                <img src="photos/Photo3.JPG" alt="Photo 3">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo4.JPG')">
-                <img src="photos/Photo4.JPG" alt="Photo 4">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo5.JPG')">
-                <img src="photos/Photo5.JPG" alt="Photo 5">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo6.JPG')">
-                <img src="photos/Photo6.JPG" alt="Photo 6">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo7.JPG')">
-                <img src="photos/Photo7.JPG" alt="Photo 7">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo8.JPG')">
-                <img src="photos/Photo8.JPG" alt="Photo 8">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo9.JPG')">
-                <img src="photos/Photo9.JPG" alt="Photo 9">
-	    </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo10.JPG')">
-                <img src="photos/Photo10.JPG" alt="Photo 10">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo11.JPG')">
-                <img src="photos/Photo11.JPG" alt="Photo 11">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo12.JPG')">
-                <img src="photos/Photo12.JPG" alt="Photo 12">
-            </div>
-            <div class="gallery-item" onclick="openViewer('photos/Photo13.JPG')">
-                <img src="photos/Photo13.JPG" alt="Photo 13">
-            </div>
-        </div>
-    </div>
+
+	<!-- Gallery1 Screen -->
+	
+	<div id="gallery1-screen" class="screen gallery1" style="display: none;">
+		<div class="gallery1-grid">
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=demonmikaa'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video1.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=lisbethjohnson2'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video2.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=itsfionaharriss'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video3.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=anastais.me'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video4.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=diana.catalina08'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video5.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=sandyd_____'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video6.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=bambidoexo'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video7.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=jettsojuicy'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video8.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=secretgeekygirlfriend'">
+				<video autoplay muted loop playsinline>
+					<source src="videos/video9.mp4" type="video/mp4">
+				</video>
+			</div>
+		</div>
+	</div>
+
+    <!-- Gallery2 Screen -->
+
+	<div id="gallery2-screen" class="screen gallery2" style="display: none;">
+		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="refreshPage()">Refresh</button>
+		<div class="gallery2-grid">
+			<div class="gallery2-item" onclick="openViewer('photos/Photo1.JPG')">
+				<img src="photos/Photo1.JPG" alt="Photo 1">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo2.JPG')">
+				<img src="photos/Photo2.JPG" alt="Photo 2">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo3.JPG')">
+				<img src="photos/Photo3.JPG" alt="Photo 3">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo4.JPG')">
+				<img src="photos/Photo4.JPG" alt="Photo 4">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo5.JPG')">
+				<img src="photos/Photo5.JPG" alt="Photo 5">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo6.JPG')">
+				<img src="photos/Photo6.JPG" alt="Photo 6">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo7.JPG')">
+				<img src="photos/Photo7.JPG" alt="Photo 7">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo8.JPG')">
+				<img src="photos/Photo8.JPG" alt="Photo 8">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo9.JPG')">
+				<img src="photos/Photo9.JPG" alt="Photo 9">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo10.JPG')">
+				<img src="photos/Photo10.JPG" alt="Photo 10">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo11.JPG')">
+				<img src="photos/Photo11.JPG" alt="Photo 11">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo12.JPG')">
+				<img src="photos/Photo12.JPG" alt="Photo 12">
+			</div>
+			<div class="gallery2-item" onclick="openViewer('photos/Photo13.JPG')">
+				<img src="photos/Photo13.JPG" alt="Photo 13">
+			</div>
+		</div>
+	</div>
 
 
     <script>
@@ -281,83 +325,68 @@
             display.textContent = '0';
         }
 
-	function calculate() {
-	    if (currentInput === password1) {
-	        showGallery('gallery-screen'); // Show the first gallery
-	    } else if (currentInput === password2) {
-	        showGallery('gallery-screen-2'); // Show the second gallery
-	    } else if (operator && previousInput) {
-	        let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
-	        currentInput = result.toString();
-	        previousInput = '';
-	        operator = null;
-	        display.textContent = currentInput;
-	    } else {
-	        display.textContent = "Error";
-	    }
-	}
+        function calculate() {
+            if (currentInput === password1) {
+                showGallery('gallery1-screen');
+            } else if (currentInput === password2) {
+                showGallery('gallery2-screen');
+            } else if (operator && previousInput) {
+                let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
+                currentInput = result.toString();
+                previousInput = '';
+                operator = null;
+                display.textContent = currentInput;
+            } else {
+                display.textContent = "Error";
+            }
+        }
 
+        function showGallery(galleryId) {
+            document.getElementById('calculator-screen').style.display = 'none';
+            document.getElementById('gallery1-screen').style.display = 'none';
+            document.getElementById('gallery2-screen').style.display = 'none';
 
+            document.getElementById(galleryId).style.display = 'flex';
+        }
 
-	function showGallery(galleryId) {
-	    // Hide all screens
-	    document.getElementById('calculator-screen').style.display = 'none';
-	    document.getElementById('gallery-screen').style.display = 'none';
-	    document.getElementById('gallery-screen-2').style.display = 'none';
-	
-	    // Show the requested gallery
-	    document.getElementById(galleryId).style.display = 'flex';
-	}
+        window.addEventListener('focus', () => {
+            document.getElementById('gallery1-screen').style.display = 'none';
+            document.getElementById('gallery2-screen').style.display = 'none';
+            document.getElementById('calculator-screen').style.display = 'flex';
+            clearDisplay();
+        });
 
-	    
-	window.addEventListener('focus', () => {
-	    document.getElementById('gallery-screen').style.display = 'none';
-	    document.getElementById('gallery-screen-2').style.display = 'none';
-	    document.getElementById('calculator-screen').style.display = 'flex';
-	    clearDisplay();
-	});
+        let zoomLevel = 1;
+        let initialDistance = null;
 
-		// Zoom functionality for gallery
-		let zoomLevel = 1;
-		let initialDistance = null;
+        function calculateDistance(touches) {
+            const dx = touches[0].pageX - touches[1].pageX;
+            const dy = touches[0].pageY - touches[1].pageY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
 
-		function calculateDistance(touches) {
-			const dx = touches[0].pageX - touches[1].pageX;
-			const dy = touches[0].pageY - touches[1].pageY;
-			return Math.sqrt(dx * dx + dy * dy);
-		}
+        document.getElementById('gallery1-screen').addEventListener('touchstart', function (event) {
+            if (event.touches.length === 2) {
+                initialDistance = calculateDistance(event.touches);
+            }
+        });
 
-		document.getElementById('gallery-screen').addEventListener('touchstart', function (event) {
-			if (event.touches.length === 2) {
-				// Two-finger touch
-				initialDistance = calculateDistance(event.touches);
-			}
-		});
+        document.getElementById('gallery1-screen').addEventListener('touchmove', function (event) {
+            if (event.touches.length === 2 && initialDistance) {
+                const currentDistance = calculateDistance(event.touches);
+                const scaleChange = currentDistance / initialDistance;
 
-		document.getElementById('gallery-screen').addEventListener('touchmove', function (event) {
-			if (event.touches.length === 2 && initialDistance) {
-				const currentDistance = calculateDistance(event.touches);
-				const scaleChange = currentDistance / initialDistance;
+                zoomLevel = Math.min(2, Math.max(1, zoomLevel * scaleChange));
+                this.style.transform = `scale(${zoomLevel})`;
+                initialDistance = currentDistance;
 
-				// Update zoom level, constrain between 1 and 2
-				zoomLevel = Math.min(2, Math.max(1, zoomLevel * scaleChange));
+                event.preventDefault();
+            }
+        });
 
-				// Apply the zoom
-				this.style.transform = `scale(${zoomLevel})`;
-
-				// Update initial distance for the next calculation
-				initialDistance = currentDistance;
-
-				// Prevent default to avoid scrolling
-				event.preventDefault();
-			}
-		});
-
-		document.getElementById('gallery-screen').addEventListener('touchend', function () {
-			// Reset initial distance when touch ends
-			initialDistance = null;
-		});
-
+        document.getElementById('gallery1-screen').addEventListener('touchend', function () {
+            initialDistance = null;
+        });
     </script>
 </body>
 </html>
