@@ -12,33 +12,22 @@
         body {
             margin: 0;
             background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Move the calculator lower */
+            height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: white;
             overflow: hidden;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        .screen {
-            display: none;
-            width: 100%;
-            height: 100vh;
-        }
-
-        .active {
-            display: flex;
         }
 
         .calculator {
+            display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-end;
             width: 360px;
             height: auto;
-            margin-bottom: 50px;
             padding: 20px;
+            box-sizing: border-box;
             border-radius: 20px;
             background-color: #000;
         }
@@ -57,7 +46,7 @@
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 10px; /* Adjust gap for better alignment */
         }
 
         button {
@@ -72,7 +61,7 @@
             color: white;
             cursor: pointer;
             transition: background-color 0.2s, transform 0.1s;
-            width: 72px;
+            width: 72px; /* Uniform button size */
             height: 72px;
         }
 
@@ -93,7 +82,7 @@
         .button-0 {
             grid-column: span 2;
             border-radius: 30px;
-            width: auto;
+            width: auto; /* Ensure proper width for the "0" button */
         }
 
         .gallery {
@@ -127,6 +116,7 @@
             width: 100%;
             height: auto;
             border-radius: 5px;
+            transform-origin: center;
         }
 
         .gallery-item:hover {
@@ -165,53 +155,24 @@
     </div>
 
     <!-- Gallery Screen -->
-    <div id="gallery-screen" class="screen gallery">
+    <div id="gallery-screen" class="screen gallery" style="display: none;">
         <div class="gallery-grid">
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=demonmikaa'">
-                <video autoplay muted loop playsinline>
+            <div class="gallery-item">
+                <video autoplay muted loop playsinline controls>
                     <source src="videos/video1.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=lisbethjohnson2'">
-                <video autoplay muted loop playsinline>
+            <div class="gallery-item">
+                <video autoplay muted loop playsinline controls>
                     <source src="videos/video2.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=itsfionaharriss'">
-                <video autoplay muted loop playsinline>
+            <div class="gallery-item">
+                <video autoplay muted loop playsinline controls>
                     <source src="videos/video3.mp4" type="video/mp4">
                 </video>
             </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=anastais.me'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video4.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=diana.catalina08'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video5.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=sandyd_____'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video6.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=bambidoexo'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video7.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=jettsojuicy'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video8.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="gallery-item" onclick="window.location.href='instagram://user?username=secretgeekygirlfriend'">
-                <video autoplay muted loop playsinline>
-                    <source src="videos/video9.mp4" type="video/mp4">
-                </video>
-            </div>
+            <!-- Add more gallery items as needed -->
         </div>
     </div>
 
@@ -263,13 +224,13 @@
         }
 
         function showGallery() {
-            document.getElementById('calculator-screen').classList.remove('active');
-            document.getElementById('gallery-screen').classList.add('active');
+            document.getElementById('calculator-screen').style.display = 'none';
+            document.getElementById('gallery-screen').style.display = 'flex';
         }
 
         window.addEventListener('focus', () => {
-            document.getElementById('gallery-screen').classList.remove('active');
-            document.getElementById('calculator-screen').classList.add('active');
+            document.getElementById('gallery-screen').style.display = 'none';
+            document.getElementById('calculator-screen').style.display = 'flex';
             clearDisplay();
         });
     </script>
