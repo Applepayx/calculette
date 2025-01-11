@@ -408,6 +408,15 @@
 	    const viewport = document.querySelector('meta[name="viewport"]');
 	    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no');
 	}
+
+	document.addEventListener("visibilitychange", function () {
+            if (document.visibilityState === "hidden") {
+            // Switch back to the calculator screen when the app is minimized
+               showCalculator();
+            }
+        });
+
+
 	
 	function showCalculator() {
 	    document.getElementById('calculator-screen').style.display = 'flex';
