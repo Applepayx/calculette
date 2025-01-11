@@ -435,14 +435,6 @@
 		viewer.style.display = 'flex';
 	}
 	
-	function closeViewer() {
-		const viewer = document.getElementById('viewer');
-	
-		viewer.style.display = 'none';
-		document.getElementById('gallery2-screen').style.display = 'flex';
-	
-		window.scrollTo(0, savedScrollPosition2);
-	}
 
         window.addEventListener('focus', () => {
             document.getElementById('gallery1-screen').style.display = 'none';
@@ -542,14 +534,30 @@
 	});
 	
 	viewer.addEventListener('touchend', function () {
-    viewerInitialDistance = null;
-});
+	    viewerInitialDistance = null;
+	});
 
-function closeViewer() {
-    viewer.style.transform = 'scale(1)';
-    viewerZoomLevel = 1;
-    viewer.style.display = 'none';
-}
+	function closeViewer() {
+	    const viewer = document.getElementById('viewer');
+	
+	    // Hide the viewer
+	    viewer.style.display = 'none';
+	
+	    // Reset viewer content
+	    viewer.style.transform = 'scale(1)';
+	    viewerZoomLevel = 1;
+	
+	    // Reset scroll position for gallery2
+	    document.getElementById('gallery2-screen').style.display = 'flex';
+	    window.scrollTo(0, savedScrollPosition2);
+	
+	    // Clear viewer content if applicable
+	    const viewerContent = document.getElementById('viewer-content');
+	    if (viewerContent) {
+	        viewerContent.innerHTML = ''; // Clear content to avoid black screen
+	    }
+	}
+
 
 
     </script>
