@@ -354,61 +354,73 @@
 
     <script>
         let display = document.getElementById('display');
-        let currentInput = '';
-        let operator = null;
-        let previousInput = '';
-        const password1 = "109";
-        const password2 = "108";
-
-        function pressKey(key) {
-            if (['+', '-', '*', '/'].includes(key)) {
-                if (currentInput) {
-                    operator = key;
-                    previousInput = currentInput;
-                    currentInput = '';
-                }
-            } else {
-                if (currentInput === '0' && key !== '.') {
-                    currentInput = '';
-                }
-                currentInput += key;
-            }
-            display.textContent = currentInput || previousInput || '0';
-        }
-
-        function clearDisplay() {
-            currentInput = '';
-            previousInput = '';
-            operator = null;
-            display.textContent = '0';
-        }
-
-        function calculate() {
-            if (currentInput === password1) {
-                showGallery('gallery1-screen');
-            } else if (currentInput === password2) {
-                showGallery('gallery2-screen');
-            } else if (operator && previousInput) {
-                let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
-                currentInput = result.toString();
-                previousInput = '';
-                operator = null;
-                display.textContent = currentInput;
-            } else {
-                display.textContent = "Error";
-            }
-        }
-
-        function showGallery(galleryId) {
-            document.getElementById('calculator-screen').style.display = 'none';
-            document.getElementById('gallery1-screen').style.display = 'none';
-            document.getElementById('gallery2-screen').style.display = 'none';
-
-            document.getElementById(galleryId).style.display = 'flex';
-        }
+	let display = document.getElementById('display');
+	let currentInput = '';
+	let operator = null;
+	let previousInput = '';
+	const password1 = "109";
+	const password2 = "108";
+	
+	function pressKey(key) {
+		if (['+', '-', '*', '/'].includes(key)) {
+			if (currentInput) {
+				operator = key;
+				previousInput = currentInput;
+				currentInput = '';
+			}
+		} else {
+			if (currentInput === '0' && key !== '.') {
+				currentInput = '';
+			}
+			currentInput += key;
+		}
+		display.textContent = currentInput || previousInput || '0';
+	}
+	
+	function clearDisplay() {
+		currentInput = '';
+		previousInput = '';
+		operator = null;
+		display.textContent = '0';
+	}
+	
+	function calculate() {
+		if (currentInput === password1) {
+			showGallery('gallery1-screen');
+		} else if (currentInput === password2) {
+			showGallery('gallery2-screen');
+		} else if (operator && previousInput) {
+			let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
+			currentInput = result.toString();
+			previousInput = '';
+			operator = null;
+			display.textContent = currentInput;
+		} else {
+			display.textContent = "Error";
+		}
+	}
+	
+	function enableZoom() {
+		const viewport = document.querySelector('meta[name="viewport"]');
+		viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+	}
+	
+	function disableZoom() {
+		const viewport = document.querySelector('meta[name="viewport"]');
+		viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no');
+	}
+	
+	function showGallery(galleryId) {
+		document.getElementById('calculator-screen').style.display = 'none';
+		document.getElementById('gallery1-screen').style.display = 'none';
+		document.getElementById('gallery2-screen').style.display = 'none';
+	
+		document.getElementById(galleryId).style.display = 'flex';
+		disableZoom(); // Disable zoom for galleries
+	}
+	
 	let savedScrollPosition2 = 0;
-
-
+	
 	function openViewer(src) {
 		const viewer = document.getElementById('viewer');
 		const viewerContent = viewer.querySelector('#viewer-content');
@@ -433,132 +445,37 @@
 	
 		document.getElementById('gallery2-screen').style.display = 'none';
 		viewer.style.display = 'flex';
+		disableZoom(); // Disable zoom for the viewer
 	}
 	
-
-        window.addEventListener('focus', () => {
-            document.getElementById('gallery1-screen').style.display = 'none';
-            document.getElementById('gallery2-screen').style.display = 'none';
-            document.getElementById('calculator-screen').style.display = 'flex';
-            clearDisplay();
-        });
-
-	// Function to calculate the distance between two touch points
-	function calculateDistance(touches) {
-	    const dx = touches[0].pageX - touches[1].pageX;
-	    const dy = touches[0].pageY - touches[1].pageY;
-	    return Math.sqrt(dx * dx + dy * dy);
-	}
-	
-	// Pinch-to-zoom functionality for gallery1
-	let zoomLevel1 = 1;
-	let initialDistance1 = null;
-	
-	const gallery1 = document.getElementById('gallery1-screen');
-	
-	gallery1.addEventListener('touchstart', function (event) {
-	    if (event.touches.length === 2) {
-	        initialDistance1 = calculateDistance(event.touches);
-	    }
+	window.addEventListener('focus', () => {
+		document.getElementById('gallery1-screen').style.display = 'none';
+		document.getElementById('gallery2-screen').style.display = 'none';
+		document.getElementById('calculator-screen').style.display = 'flex';
+		clearDisplay();
+		enableZoom(); // Enable zoom for the calculator screen
 	});
 	
-	gallery1.addEventListener('touchmove', function (event) {
-	    if (event.touches.length === 2 && initialDistance1) {
-	        const currentDistance = calculateDistance(event.touches);
-	        const scaleChange = currentDistance / initialDistance1;
-	
-	        zoomLevel1 = Math.min(4, Math.max(1, zoomLevel1 * scaleChange));
-	        this.style.transform = `scale(${zoomLevel1})`;
-	        initialDistance1 = currentDistance;
-	
-	        event.preventDefault();
-	    }
-	});
-	
-	gallery1.addEventListener('touchend', function () {
-	    initialDistance1 = null;
-	});
-	
-	// Pinch-to-zoom functionality for gallery2
-	let zoomLevel2 = 1;
-	let initialDistance2 = null;
-	
-	const gallery2 = document.getElementById('gallery2-screen');
-	
-	gallery2.addEventListener('touchstart', function (event) {
-	    if (event.touches.length === 2) {
-	        initialDistance2 = calculateDistance(event.touches);
-	    }
-	});
-	
-	gallery2.addEventListener('touchmove', function (event) {
-	    if (event.touches.length === 2 && initialDistance2) {
-	        const currentDistance = calculateDistance(event.touches);
-	        const scaleChange = currentDistance / initialDistance2;
-	
-	        zoomLevel2 = Math.min(4, Math.max(1, zoomLevel2 * scaleChange));
-	        this.style.transform = `scale(${zoomLevel2})`;
-	        initialDistance2 = currentDistance;
-	
-	        event.preventDefault();
-	    }
-	});
-	
-	gallery2.addEventListener('touchend', function () {
-	    initialDistance2 = null;
-	});
-	
-	// Pinch-to-zoom functionality for viewer
-	let viewerZoomLevel = 1;
-	let viewerInitialDistance = null;
-	
-	const viewer = document.getElementById('viewer');
-	
-	viewer.addEventListener('touchstart', function (event) {
-	    if (event.touches.length === 2) {
-	        viewerInitialDistance = calculateDistance(event.touches);
-	    }
-	});
-	
-	viewer.addEventListener('touchmove', function (event) {
-	    if (event.touches.length === 2 && viewerInitialDistance) {
-	        const currentDistance = calculateDistance(event.touches);
-	        const scaleChange = currentDistance / viewerInitialDistance;
-	
-	        viewerZoomLevel = Math.min(4, Math.max(1, viewerZoomLevel * scaleChange));
-	        this.style.transform = `scale(${viewerZoomLevel})`;
-	        viewerInitialDistance = currentDistance;
-	
-	        event.preventDefault();
-	    }
-	});
-	
-	viewer.addEventListener('touchend', function () {
-	    viewerInitialDistance = null;
-	});
-
 	function closeViewer() {
-	    const viewer = document.getElementById('viewer');
+		const viewer = document.getElementById('viewer');
 	
-	    // Hide the viewer
-	    viewer.style.display = 'none';
+		// Hide the viewer
+		viewer.style.display = 'none';
 	
-	    // Reset viewer content
-	    viewer.style.transform = 'scale(1)';
-	    viewerZoomLevel = 1;
+		// Reset scroll position for gallery2
+		document.getElementById('gallery2-screen').style.display = 'flex';
+		window.scrollTo(0, savedScrollPosition2);
 	
-	    // Reset scroll position for gallery2
-	    document.getElementById('gallery2-screen').style.display = 'flex';
-	    window.scrollTo(0, savedScrollPosition2);
+		// Clear viewer content if applicable
+		const viewerContent = document.getElementById('viewer-content');
+		if (viewerContent) {
+			viewerContent.innerHTML = ''; // Clear content to avoid black screen
+		}
 	
-	    // Clear viewer content if applicable
-	    const viewerContent = document.getElementById('viewer-content');
-	    if (viewerContent) {
-	        viewerContent.innerHTML = ''; // Clear content to avoid black screen
-	    }
+		enableZoom(); // Re-enable zoom for the calculator screen
 	}
-
-
+	
+	        
 
     </script>
 </body>
