@@ -507,6 +507,38 @@
 	
 	document.getElementById('gallery2-screen').addEventListener('touchend', function () {
 	    initialDistance2 = null;
+	});
+	
+	let viewerZoomLevel = 1; // Initial zoom level for the viewer
+	let viewerInitialDistance = null;
+	
+	// Get the viewer element
+	const viewer = document.getElementById('viewer');
+	
+	// Touchstart for the viewer
+	viewer.addEventListener('touchstart', function (event) {
+	    if (event.touches.length === 2) {
+	        viewerInitialDistance = calculateDistance(event.touches);
+	    }
+	});
+	
+	// Touchmove for the viewer
+	viewer.addEventListener('touchmove', function (event) {
+	    if (event.touches.length === 2 && viewerInitialDistance) {
+	        const currentDistance = calculateDistance(event.touches);
+	        const scaleChange = currentDistance / viewerInitialDistance;
+	
+	        viewerZoomLevel = Math.min(3, Math.max(1, viewerZoomLevel * scaleChange)); // Allow zoom up to 3x
+	        this.style.transform = `scale(${viewerZoomLevel})`;
+	        viewerInitialDistance = currentDistance;
+	
+	        event.preventDefault();
+	    }
+	});
+	
+	// Touchend for the viewer
+	viewer.addEventListener('touchend', function () {
+	    viewerInitialDistance = null;
 	});    
     </script>
 </body>
