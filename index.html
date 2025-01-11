@@ -458,6 +458,12 @@
 	    return Math.sqrt(dx * dx + dy * dy);
 	}
 	
+	// Common function to stop event propagation
+	function stopEvent(event) {
+	    event.stopPropagation();
+	    event.preventDefault();
+	}
+	
 	// Pinch-to-zoom and pan for gallery1
 	let zoomLevel1 = 1;
 	let initialDistance1 = null;
@@ -472,6 +478,7 @@
 	    if (event.touches.length === 2) {
 	        initialDistance1 = calculateDistance(event.touches);
 	        isPanning1 = false;
+	        stopEvent(event);
 	    } else if (event.touches.length === 1) {
 	        isPanning1 = true;
 	        lastTouchPosition1 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
@@ -487,7 +494,7 @@
 	        this.style.transform = `scale(${zoomLevel1}) translate(${translateX1}px, ${translateY1}px)`;
 	        initialDistance1 = currentDistance;
 	
-	        event.preventDefault();
+	        stopEvent(event);
 	    } else if (event.touches.length === 1 && isPanning1) {
 	        const deltaX = event.touches[0].pageX - lastTouchPosition1.x;
 	        const deltaY = event.touches[0].pageY - lastTouchPosition1.y;
@@ -498,7 +505,7 @@
 	        this.style.transform = `scale(${zoomLevel1}) translate(${translateX1}px, ${translateY1}px)`;
 	        lastTouchPosition1 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
 	
-	        event.preventDefault();
+	        stopEvent(event);
 	    }
 	});
 	
@@ -521,6 +528,7 @@
 	    if (event.touches.length === 2) {
 	        initialDistance2 = calculateDistance(event.touches);
 	        isPanning2 = false;
+	        stopEvent(event);
 	    } else if (event.touches.length === 1) {
 	        isPanning2 = true;
 	        lastTouchPosition2 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
@@ -536,83 +544,84 @@
 	        this.style.transform = `scale(${zoomLevel2}) translate(${translateX2}px, ${translateY2}px)`;
 	        initialDistance2 = currentDistance;
 	
-	        event.preventDefault();
+	        stopEvent(event);
 	    } else if (event.touches.length === 1 && isPanning2) {
 	        const deltaX = event.touches[0].pageX - lastTouchPosition2.x;
 	        const deltaY = event.touches[0].pageY - lastTouchPosition2.y;
-	
-	        translateX2 += deltaX;
-	        translateY2 += deltaY;
-	
-	        this.style.transform = `scale(${zoomLevel2}) translate(${translateX2}px, ${translateY2}px)`;
-	        lastTouchPosition2 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
-	
-	        event.preventDefault();
-	    }
-	});
-	
-	gallery2.addEventListener('touchend', function () {
-	    initialDistance2 = null;
-	    isPanning2 = false;
-	});
-	
-	// Pinch-to-zoom and pan for viewer
-	let viewerZoomLevel = 1;
-	let viewerInitialDistance = null;
-	let viewerTranslateX = 0;
-	let viewerTranslateY = 0;
-	let viewerIsPanning = false;
-	let viewerLastTouchPosition = { x: 0, y: 0 };
-	
-	const viewer = document.getElementById('viewer');
-	
-	viewer.addEventListener('touchstart', function (event) {
-	    if (event.touches.length === 2) {
-	        viewerInitialDistance = calculateDistance(event.touches);
-	        viewerIsPanning = false;
-	    } else if (event.touches.length === 1) {
-	        viewerIsPanning = true;
-	        viewerLastTouchPosition = { x: event.touches[0].pageX, y: event.touches[0].pageY };
-	    }
-	});
-	
-	viewer.addEventListener('touchmove', function (event) {
-	    if (event.touches.length === 2 && viewerInitialDistance) {
-	        const currentDistance = calculateDistance(event.touches);
-	        const scaleChange = currentDistance / viewerInitialDistance;
-	
-	        viewerZoomLevel = Math.min(4, Math.max(1, viewerZoomLevel * scaleChange));
-	        this.style.transform = `scale(${viewerZoomLevel}) translate(${viewerTranslateX}px, ${viewerTranslateY}px)`;
-	        viewerInitialDistance = currentDistance;
-	
-	        event.preventDefault();
-	    } else if (event.touches.length === 1 && viewerIsPanning) {
-	        const deltaX = event.touches[0].pageX - viewerLastTouchPosition.x;
-	        const deltaY = event.touches[0].pageY - viewerLastTouchPosition.y;
-	
-	        viewerTranslateX += deltaX;
-	        viewerTranslateY += deltaY;
-	
-	        this.style.transform = `scale(${viewerZoomLevel}) translate(${viewerTranslateX}px, ${viewerTranslateY}px)`;
-	        viewerLastTouchPosition = { x: event.touches[0].pageX, y: event.touches[0].pageY };
-	
-	        event.preventDefault();
-	    }
-	});
-	
-	viewer.addEventListener('touchend', function () {
-	    viewerInitialDistance = null;
-	    viewerIsPanning = false;
-	});
-	
-	function closeViewer() {
-	    viewer.style.transform = 'scale(1) translate(0px, 0px)';
-	    viewerZoomLevel = 1;
-	    viewerTranslateX = 0;
-	    viewerTranslateY = 0;
-	    viewer.style.display = 'none';
-	}
-	});    
+
+        translateX2 += deltaX;
+        translateY2 += deltaY;
+
+        this.style.transform = `scale(${zoomLevel2}) translate(${translateX2}px, ${translateY2}px)`;
+        lastTouchPosition2 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
+
+        stopEvent(event);
+    }
+});
+
+gallery2.addEventListener('touchend', function () {
+    initialDistance2 = null;
+    isPanning2 = false;
+});
+
+// Pinch-to-zoom and pan for viewer
+let viewerZoomLevel = 1;
+let viewerInitialDistance = null;
+let viewerTranslateX = 0;
+let viewerTranslateY = 0;
+let viewerIsPanning = false;
+let viewerLastTouchPosition = { x: 0, y: 0 };
+
+const viewer = document.getElementById('viewer');
+
+viewer.addEventListener('touchstart', function (event) {
+    if (event.touches.length === 2) {
+        viewerInitialDistance = calculateDistance(event.touches);
+        viewerIsPanning = false;
+        stopEvent(event);
+    } else if (event.touches.length === 1) {
+        viewerIsPanning = true;
+        viewerLastTouchPosition = { x: event.touches[0].pageX, y: event.touches[0].pageY };
+    }
+});
+
+viewer.addEventListener('touchmove', function (event) {
+    if (event.touches.length === 2 && viewerInitialDistance) {
+        const currentDistance = calculateDistance(event.touches);
+        const scaleChange = currentDistance / viewerInitialDistance;
+
+        viewerZoomLevel = Math.min(4, Math.max(1, viewerZoomLevel * scaleChange));
+        this.style.transform = `scale(${viewerZoomLevel}) translate(${viewerTranslateX}px, ${viewerTranslateY}px)`;
+        viewerInitialDistance = currentDistance;
+
+        stopEvent(event);
+    } else if (event.touches.length === 1 && viewerIsPanning) {
+        const deltaX = event.touches[0].pageX - viewerLastTouchPosition.x;
+        const deltaY = event.touches[0].pageY - viewerLastTouchPosition.y;
+
+        viewerTranslateX += deltaX;
+        viewerTranslateY += deltaY;
+
+        this.style.transform = `scale(${viewerZoomLevel}) translate(${viewerTranslateX}px, ${viewerTranslateY}px)`;
+        viewerLastTouchPosition = { x: event.touches[0].pageX, y: event.touches[0].pageY };
+
+        stopEvent(event);
+    }
+});
+
+viewer.addEventListener('touchend', function () {
+    viewerInitialDistance = null;
+    viewerIsPanning = false;
+});
+
+function closeViewer() {
+    viewer.style.transform = 'scale(1) translate(0px, 0px)';
+    viewerZoomLevel = 1;
+    viewerTranslateX = 0;
+    viewerTranslateY = 0;
+    viewer.style.display = 'none';
+}
+ 
     </script>
 </body>
 </html>
