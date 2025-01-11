@@ -21,6 +21,10 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             color: white;
             overflow: hidden;
+	    user-select: none;
+	    -webkit-user-select: none; /* Safari */
+
+	
         }
 
         .calculator {
@@ -478,6 +482,32 @@
         document.getElementById('gallery1-screen').addEventListener('touchend', function () {
             initialDistance = null;
         });
+	// Pinch-to-zoom for gallery2
+	let zoomLevel2 = 1;
+	let initialDistance2 = null;
+	
+	document.getElementById('gallery2-screen').addEventListener('touchstart', function (event) {
+	    if (event.touches.length === 2) {
+	        initialDistance2 = calculateDistance(event.touches);
+	    }
+	});
+	
+	document.getElementById('gallery2-screen').addEventListener('touchmove', function (event) {
+	    if (event.touches.length === 2 && initialDistance2) {
+	        const currentDistance = calculateDistance(event.touches);
+	        const scaleChange = currentDistance / initialDistance2;
+	
+	        zoomLevel2 = Math.min(2, Math.max(1, zoomLevel2 * scaleChange));
+	        this.style.transform = `scale(${zoomLevel2})`;
+	        initialDistance2 = currentDistance;
+	
+	        event.preventDefault();
+	    }
+	});
+	
+	document.getElementById('gallery2-screen').addEventListener('touchend', function () {
+	    initialDistance2 = null;
+	});    
     </script>
 </body>
 </html>
