@@ -464,6 +464,14 @@
 	    event.preventDefault();
 	}
 	
+	// Reset transformation and state for an element
+	function resetTransform(element, zoomLevelVar, translateXVar, translateYVar) {
+	    element.style.transform = 'scale(1) translate(0px, 0px)';
+	    window[zoomLevelVar] = 1;
+	    window[translateXVar] = 0;
+	    window[translateYVar] = 0;
+	}
+	
 	// Pinch-to-zoom and pan for gallery1
 	let zoomLevel1 = 1;
 	let initialDistance1 = null;
@@ -627,12 +635,10 @@
 	});
 	
 	function closeViewer() {
-	    viewer.style.transform = 'scale(1) translate(0px, 0px)';
-	    viewerZoomLevel = 1;
-	    viewerTranslateX = 0;
-	    viewerTranslateY = 0;
+	    resetTransform(viewer, 'viewerZoomLevel', 'viewerTranslateX', 'viewerTranslateY');
 	    viewer.style.display = 'none';
 	}
+
 
     </script>
 </body>
