@@ -400,81 +400,63 @@
 	}
 	
 	function enableZoom() {
-		const viewport = document.querySelector('meta[name="viewport"]');
-		viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+	    const viewport = document.querySelector('meta[name="viewport"]');
+	    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes');
 	}
 	
 	function disableZoom() {
-		const viewport = document.querySelector('meta[name="viewport"]');
-		viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no');
+	    const viewport = document.querySelector('meta[name="viewport"]');
+	    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no');
+	}
+	
+	function showCalculator() {
+	    document.getElementById('calculator-screen').style.display = 'flex';
+	    document.getElementById('gallery1-screen').style.display = 'none';
+	    document.getElementById('gallery2-screen').style.display = 'none';
+	    document.getElementById('viewer').style.display = 'none';
+	
+	    disableZoom(); // Disable zoom on the calculator screen
 	}
 	
 	function showGallery(galleryId) {
-		document.getElementById('calculator-screen').style.display = 'none';
-		document.getElementById('gallery1-screen').style.display = 'none';
-		document.getElementById('gallery2-screen').style.display = 'none';
+	    document.getElementById('calculator-screen').style.display = 'none';
+	    document.getElementById('gallery1-screen').style.display = 'none';
+	    document.getElementById('gallery2-screen').style.display = 'none';
 	
-		document.getElementById(galleryId).style.display = 'flex';
-		disableZoom(); // Disable zoom for galleries
+	    document.getElementById(galleryId).style.display = 'flex';
+	    enableZoom(); // Enable zoom on gallery screens
 	}
-	
-	let savedScrollPosition2 = 0;
 	
 	function openViewer(src) {
-		const viewer = document.getElementById('viewer');
-		const viewerContent = viewer.querySelector('#viewer-content');
-		viewerContent.innerHTML = ''; // Clear existing content
+	    const viewer = document.getElementById('viewer');
+	    const viewerContent = document.getElementById('viewer-content');
+	    viewerContent.innerHTML = ''; // Clear existing content
 	
-		savedScrollPosition2 = window.scrollY;
+	    if (src.endsWith('.mp4')) {
+	        const video = document.createElement('video');
+	        video.src = src;
+	        video.controls = true;
+	        video.autoplay = true;
+	        viewerContent.appendChild(video);
+	    } else {
+	        const img = document.createElement('img');
+	        img.src = src;
+	        img.style.objectFit = 'contain';
+	        img.style.maxWidth = '100%';
+	        img.style.maxHeight = '100%';
+	        viewerContent.appendChild(img);
+	    }
 	
-		if (src.endsWith('.mp4')) {
-			const video = document.createElement('video');
-			video.src = src;
-			video.controls = true;
-			video.autoplay = true;
-			viewerContent.appendChild(video);
-		} else {
-			const img = document.createElement('img');
-			img.src = src;
-			img.style.objectFit = 'contain';
-			img.style.maxWidth = '100%';
-			img.style.maxHeight = '100%';
-			viewerContent.appendChild(img);
-		}
-	
-		document.getElementById('gallery2-screen').style.display = 'none';
-		viewer.style.display = 'flex';
-		disableZoom(); // Disable zoom for the viewer
+	    viewer.style.display = 'flex';
+	    enableZoom(); // Enable zoom in the viewer
 	}
-	
-	window.addEventListener('focus', () => {
-		document.getElementById('gallery1-screen').style.display = 'none';
-		document.getElementById('gallery2-screen').style.display = 'none';
-		document.getElementById('calculator-screen').style.display = 'flex';
-		clearDisplay();
-		enableZoom(); // Enable zoom for the calculator screen
-	});
 	
 	function closeViewer() {
-		const viewer = document.getElementById('viewer');
-	
-		// Hide the viewer
-		viewer.style.display = 'none';
-	
-		// Reset scroll position for gallery2
-		document.getElementById('gallery2-screen').style.display = 'flex';
-		window.scrollTo(0, savedScrollPosition2);
-	
-		// Clear viewer content if applicable
-		const viewerContent = document.getElementById('viewer-content');
-		if (viewerContent) {
-			viewerContent.innerHTML = ''; // Clear content to avoid black screen
-		}
-	
-		enableZoom(); // Re-enable zoom for the calculator screen
-	}
-	
-	        
+	    const viewer = document.getElementById('viewer');
+	    viewer.style.display = 'none';
+	    document.getElementById('gallery2-screen').style.display = 'flex';
+	    disableZoom(); // Return to zoom-disabled state
+	}     
 
     </script>
 </body>
