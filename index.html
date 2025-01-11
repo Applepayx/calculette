@@ -451,94 +451,167 @@
             clearDisplay();
         });
 
-        let zoomLevel = 1;
-        let initialDistance = null;
-
-        function calculateDistance(touches) {
-            const dx = touches[0].pageX - touches[1].pageX;
-            const dy = touches[0].pageY - touches[1].pageY;
-            return Math.sqrt(dx * dx + dy * dy);
-        }
-
-        document.getElementById('gallery1-screen').addEventListener('touchstart', function (event) {
-            if (event.touches.length === 2) {
-                initialDistance = calculateDistance(event.touches);
-            }
-        });
-
-        document.getElementById('gallery1-screen').addEventListener('touchmove', function (event) {
-            if (event.touches.length === 2 && initialDistance) {
-                const currentDistance = calculateDistance(event.touches);
-                const scaleChange = currentDistance / initialDistance;
-
-                zoomLevel = Math.min(3, Math.max(1, zoomLevel * scaleChange));
-                this.style.transform = `scale(${zoomLevel})`;
-                initialDistance = currentDistance;
-
-                event.preventDefault();
-            }
-        });
-
-        document.getElementById('gallery1-screen').addEventListener('touchend', function () {
-            initialDistance = null;
-        });
-	// Pinch-to-zoom for gallery2
-	let zoomLevel2 = 1;
-	let initialDistance2 = null;
+	// Function to calculate the distance between two touch points
+	function calculateDistance(touches) {
+	    const dx = touches[0].pageX - touches[1].pageX;
+	    const dy = touches[0].pageY - touches[1].pageY;
+	    return Math.sqrt(dx * dx + dy * dy);
+	}
 	
-	document.getElementById('gallery2-screen').addEventListener('touchstart', function (event) {
+	// Pinch-to-zoom and pan for gallery1
+	let zoomLevel1 = 1;
+	let initialDistance1 = null;
+	let translateX1 = 0;
+	let translateY1 = 0;
+	let isPanning1 = false;
+	let lastTouchPosition1 = { x: 0, y: 0 };
+	
+	const gallery1 = document.getElementById('gallery1-screen');
+	
+	gallery1.addEventListener('touchstart', function (event) {
 	    if (event.touches.length === 2) {
-	        initialDistance2 = calculateDistance(event.touches);
+	        initialDistance1 = calculateDistance(event.touches);
+	        isPanning1 = false;
+	    } else if (event.touches.length === 1) {
+	        isPanning1 = true;
+	        lastTouchPosition1 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
 	    }
 	});
 	
-	document.getElementById('gallery2-screen').addEventListener('touchmove', function (event) {
-	    if (event.touches.length === 2 && initialDistance2) {
+	gallery1.addEventListener('touchmove', function (event) {
+	    if (event.touches.length === 2 && initialDistance1) {
 	        const currentDistance = calculateDistance(event.touches);
-	        const scaleChange = currentDistance / initialDistance2;
+	        const scaleChange = currentDistance / initialDistance1;
 	
-	        zoomLevel2 = Math.min(3, Math.max(1, zoomLevel2 * scaleChange));
-	        this.style.transform = `scale(${zoomLevel2})`;
-	        initialDistance2 = currentDistance;
+	        zoomLevel1 = Math.min(4, Math.max(1, zoomLevel1 * scaleChange));
+	        this.style.transform = `scale(${zoomLevel1}) translate(${translateX1}px, ${translateY1}px)`;
+	        initialDistance1 = currentDistance;
+	
+	        event.preventDefault();
+	    } else if (event.touches.length === 1 && isPanning1) {
+	        const deltaX = event.touches[0].pageX - lastTouchPosition1.x;
+	        const deltaY = event.touches[0].pageY - lastTouchPosition1.y;
+	
+	        translateX1 += deltaX;
+	        translateY1 += deltaY;
+	
+	        this.style.transform = `scale(${zoomLevel1}) translate(${translateX1}px, ${translateY1}px)`;
+	        lastTouchPosition1 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
 	
 	        event.preventDefault();
 	    }
 	});
 	
-	document.getElementById('gallery2-screen').addEventListener('touchend', function () {
-	    initialDistance2 = null;
+	gallery1.addEventListener('touchend', function () {
+	    initialDistance1 = null;
+	    isPanning1 = false;
 	});
 	
-	let viewerZoomLevel = 1; // Initial zoom level for the viewer
-	let viewerInitialDistance = null;
+	// Pinch-to-zoom and pan for gallery2
+	let zoomLevel2 = 1;
+	let initialDistance2 = null;
+	let translateX2 = 0;
+	let translateY2 = 0;
+	let isPanning2 = false;
+	let lastTouchPosition2 = { x: 0, y: 0 };
 	
-	// Get the viewer element
-	const viewer = document.getElementById('viewer');
+	const gallery2 = document.getElementById('gallery2-screen');
 	
-	// Touchstart for the viewer
-	viewer.addEventListener('touchstart', function (event) {
+	gallery2.addEventListener('touchstart', function (event) {
 	    if (event.touches.length === 2) {
-	        viewerInitialDistance = calculateDistance(event.touches);
+	        initialDistance2 = calculateDistance(event.touches);
+	        isPanning2 = false;
+	    } else if (event.touches.length === 1) {
+	        isPanning2 = true;
+	        lastTouchPosition2 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
 	    }
 	});
 	
-	// Touchmove for the viewer
+	gallery2.addEventListener('touchmove', function (event) {
+	    if (event.touches.length === 2 && initialDistance2) {
+	        const currentDistance = calculateDistance(event.touches);
+	        const scaleChange = currentDistance / initialDistance2;
+	
+	        zoomLevel2 = Math.min(4, Math.max(1, zoomLevel2 * scaleChange));
+	        this.style.transform = `scale(${zoomLevel2}) translate(${translateX2}px, ${translateY2}px)`;
+	        initialDistance2 = currentDistance;
+	
+	        event.preventDefault();
+	    } else if (event.touches.length === 1 && isPanning2) {
+	        const deltaX = event.touches[0].pageX - lastTouchPosition2.x;
+	        const deltaY = event.touches[0].pageY - lastTouchPosition2.y;
+	
+	        translateX2 += deltaX;
+	        translateY2 += deltaY;
+	
+	        this.style.transform = `scale(${zoomLevel2}) translate(${translateX2}px, ${translateY2}px)`;
+	        lastTouchPosition2 = { x: event.touches[0].pageX, y: event.touches[0].pageY };
+	
+	        event.preventDefault();
+	    }
+	});
+	
+	gallery2.addEventListener('touchend', function () {
+	    initialDistance2 = null;
+	    isPanning2 = false;
+	});
+	
+	// Pinch-to-zoom and pan for viewer
+	let viewerZoomLevel = 1;
+	let viewerInitialDistance = null;
+	let viewerTranslateX = 0;
+	let viewerTranslateY = 0;
+	let viewerIsPanning = false;
+	let viewerLastTouchPosition = { x: 0, y: 0 };
+	
+	const viewer = document.getElementById('viewer');
+	
+	viewer.addEventListener('touchstart', function (event) {
+	    if (event.touches.length === 2) {
+	        viewerInitialDistance = calculateDistance(event.touches);
+	        viewerIsPanning = false;
+	    } else if (event.touches.length === 1) {
+	        viewerIsPanning = true;
+	        viewerLastTouchPosition = { x: event.touches[0].pageX, y: event.touches[0].pageY };
+	    }
+	});
+	
 	viewer.addEventListener('touchmove', function (event) {
 	    if (event.touches.length === 2 && viewerInitialDistance) {
 	        const currentDistance = calculateDistance(event.touches);
 	        const scaleChange = currentDistance / viewerInitialDistance;
 	
-	        viewerZoomLevel = Math.min(3, Math.max(1, viewerZoomLevel * scaleChange)); // Allow zoom up to 3x
-	        this.style.transform = `scale(${viewerZoomLevel})`;
+	        viewerZoomLevel = Math.min(4, Math.max(1, viewerZoomLevel * scaleChange));
+	        this.style.transform = `scale(${viewerZoomLevel}) translate(${viewerTranslateX}px, ${viewerTranslateY}px)`;
 	        viewerInitialDistance = currentDistance;
+	
+	        event.preventDefault();
+	    } else if (event.touches.length === 1 && viewerIsPanning) {
+	        const deltaX = event.touches[0].pageX - viewerLastTouchPosition.x;
+	        const deltaY = event.touches[0].pageY - viewerLastTouchPosition.y;
+	
+	        viewerTranslateX += deltaX;
+	        viewerTranslateY += deltaY;
+	
+	        this.style.transform = `scale(${viewerZoomLevel}) translate(${viewerTranslateX}px, ${viewerTranslateY}px)`;
+	        viewerLastTouchPosition = { x: event.touches[0].pageX, y: event.touches[0].pageY };
 	
 	        event.preventDefault();
 	    }
 	});
 	
-	// Touchend for the viewer
 	viewer.addEventListener('touchend', function () {
 	    viewerInitialDistance = null;
+	    viewerIsPanning = false;
+	});
+	
+	function closeViewer() {
+	    viewer.style.transform = 'scale(1) translate(0px, 0px)';
+	    viewerZoomLevel = 1;
+	    viewerTranslateX = 0;
+	    viewerTranslateY = 0;
+	    viewer.style.display = 'none';
+	}
 	});    
     </script>
 </body>
