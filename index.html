@@ -471,7 +471,7 @@
                 const currentDistance = calculateDistance(event.touches);
                 const scaleChange = currentDistance / initialDistance;
 
-                zoomLevel = Math.min(2, Math.max(1, zoomLevel * scaleChange));
+                zoomLevel = Math.min(3, Math.max(1, zoomLevel * scaleChange));
                 this.style.transform = `scale(${zoomLevel})`;
                 initialDistance = currentDistance;
 
@@ -497,7 +497,7 @@
 	        const currentDistance = calculateDistance(event.touches);
 	        const scaleChange = currentDistance / initialDistance2;
 	
-	        zoomLevel2 = Math.min(2, Math.max(1, zoomLevel2 * scaleChange));
+	        zoomLevel2 = Math.min(3, Math.max(1, zoomLevel2 * scaleChange));
 	        this.style.transform = `scale(${zoomLevel2})`;
 	        initialDistance2 = currentDistance;
 	
