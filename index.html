@@ -319,50 +319,15 @@
 	<div id="gallery2-screen" class="screen gallery2" style="display: none;">
 		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="refreshPage()">Refresh</button>
 		<div class="gallery2-grid">
-			<div class="gallery2-item" onclick="openViewer('photos/Photo1.JPG')">
-				<img src="photos/Photo1.JPG" alt="Photo 1">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo2.JPG')">
-				<img src="photos/Photo2.JPG" alt="Photo 2">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo3.JPG')">
-				<img src="photos/Photo3.JPG" alt="Photo 3">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo4.JPG')">
-				<img src="photos/Photo4.JPG" alt="Photo 4">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo5.JPG')">
-				<img src="photos/Photo5.JPG" alt="Photo 5">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo6.JPG')">
-				<img src="photos/Photo6.JPG" alt="Photo 6">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo7.JPG')">
-				<img src="photos/Photo7.JPG" alt="Photo 7">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo8.JPG')">
-				<img src="photos/Photo8.JPG" alt="Photo 8">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo9.JPG')">
-				<img src="photos/Photo9.JPG" alt="Photo 9">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo10.JPG')">
-				<img src="photos/Photo10.JPG" alt="Photo 10">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo11.JPG')">
-				<img src="photos/Photo11.JPG" alt="Photo 11">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo12.JPG')">
-				<img src="photos/Photo12.JPG" alt="Photo 12">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo13.JPG')">
-				<img src="photos/Photo13.JPG" alt="Photo 13">
-			</div>
-			<div class="gallery2-item" onclick="openViewer('photos/Photo14.JPG')">
-				<img src="photos/Photo14.JPG" alt="Photo 14">
-			</div>
-
-			
+                    <script>
+                        for (let i = 1; i <= 100; i++) {
+                            document.write(`
+                                <div class="gallery2-item" onclick="openViewer('photos/Photo${i}.JPG')">
+                                    <img src="photos/Photo${i}.JPG" alt="Photo ${i}">
+                                </div>
+                            `);
+                        }
+                    </script>
 		</div>
 	</div>
 	<div id="viewer" style="display: none;">
