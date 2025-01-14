@@ -102,23 +102,8 @@
             overflow: scroll;
             transform-origin: center;
             transition: transform 0.3s ease-in-
-
-	/* ADDED PROPERTIES FOR SCROLLBAR */
-           overflow-y: scroll; /* Enable vertical scrolling */
-           -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-           scrollbar-width: thin; /* Thin scrollbar for modern browsers */
-           scrollbar-color: white transparent; /* White scrollbar thumb */
-           }
-
-        /* ADDED: Custom scrollbar styles for gallery1 */
-        .gallery1::-webkit-scrollbar {
-        width: 8px; /* Width of the scrollbar */
+		    
         }
-
-        .gallery1::-webkit-scrollbar-thumb {
-        background: white; /* Scrollbar thumb color */
-        border-radius: 4px; /* Rounded edges */
-
         .gallery1-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
