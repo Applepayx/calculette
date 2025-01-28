@@ -353,10 +353,13 @@
 	const password3 = "1070";  // New password
 
 	function openLinkWithoutSearchBar(url) {
-	    const link = document.createElement('a');
-	    link.href = url;
-	    link.target = '_blank'; // Opens in a new tab
-	    link.click();
+	    // Create a new window with minimal UI
+	    const newWindow = window.open(url, '_blank', 'toolbar=no,scrollbars=yes,resizable=yes,top=0,left=0,width=100%,height=100%');
+	    if (newWindow) {
+	        newWindow.focus();
+	    } else {
+	        console.error('Failed to open link');
+	    }
 	}
 
 	    
