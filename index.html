@@ -324,8 +324,8 @@
     <!-- Gallery2 Screen -->
 
 	<div id="gallery2-screen" class="screen gallery2" style="display: none;">
-		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="showCalculator()">Refresh</button>
-		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 10px; border: none; cursor: pointer;" onclick="showGallery('gallery1-screen')">GO</button>
+		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showCalculator()">Refresh</button>
+		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showGallery('gallery1-screen')">Photos</button>
 		<div class="gallery2-grid">
                     <script>
                         for (let i = 1; i <= 100; i++) {
@@ -350,19 +350,6 @@
 	let previousInput = '';
 	const password1 = "1090";
 	const password2 = "1080";
-	const password3 = "1070";  // New password
-
-	function openLinkWithoutSearchBar(url) {
-	    // Create a new window with minimal UI
-	    const newWindow = window.open(url, '_blank', 'toolbar=no,scrollbars=yes,resizable=yes,top=0,left=0,width=100%,height=100%');
-	    if (newWindow) {
-	        newWindow.focus();
-	    } else {
-	        console.error('Failed to open link');
-	    }
-	}
-
-	    
 	
 	function pressKey(key) {
 		if (['+', '-', '*', '/'].includes(key)) {
