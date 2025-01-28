@@ -382,10 +382,7 @@
 			showGallery('gallery1-screen');
 		} else if (currentInput === password2) {
 			showGallery('gallery2-screen');
-	        } else if (currentInput === password3) {
-			// Open the website in the same PWA without the address bar
-       		   	 openLinkWithoutSearchBar('https://deepshadow3rd.github.io/apps/');
-			
+	        
 		} else if (operator && previousInput) {
 			let result = eval(`${parseFloat(previousInput)} ${operator} ${parseFloat(currentInput)}`);
 			currentInput = result.toString();
