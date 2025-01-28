@@ -1,20 +1,21 @@
 {
-    "name": "Calculator",
-    "short_name": "Calc",
-    "start_url": ".",
-    "display": "standalone",
-    "background_color": "#000000",
-    "theme_color": "#000000",
-    "icons": [
-        {
-            "src": "icon.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "icon.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "short_name": "Calculator",
+  "name": "Calculator App",
+  "description": "A simple calculator app with a gallery feature.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "ici.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "ici.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
