@@ -351,7 +351,15 @@
 	const password1 = "1090";
 	const password2 = "1080";
 	const password3 = "1070";  // New password
-    
+
+	function openLinkWithoutSearchBar(url) {
+	    const link = document.createElement('a');
+	    link.href = url;
+	    link.target = '_blank'; // Opens in a new tab
+	    link.click();
+	}
+
+	    
 	
 	function pressKey(key) {
 		if (['+', '-', '*', '/'].includes(key)) {
