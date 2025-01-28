@@ -260,6 +260,9 @@
 	<!-- Gallery1 Screen -->
 	
 	<div id="gallery1-screen" class="screen gallery1" style="display: none;">
+		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showCalculator()">Refresh</button>
+		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showGallery('gallery1-screen')">Photos</button>
+
 		<div class="gallery1-grid">
 			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=demonmikaa'">
 				<video autoplay muted loop playsinline>
@@ -325,7 +328,7 @@
 
 	<div id="gallery2-screen" class="screen gallery2" style="display: none;">
 		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showCalculator()">Refresh</button>
-		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showGallery('gallery1-screen')">Photos</button>
+		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showGallery('gallery1-screen')">Videos</button>
 		<div class="gallery2-grid">
                     <script>
                         for (let i = 1; i <= 100; i++) {
