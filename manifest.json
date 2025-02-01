@@ -1,7 +1,7 @@
 {
-  "short_name": "Calculator",
-  "name": "Calculator App",
-  "description": "A simple calculator app with a gallery feature.",
+  "short_name": "Calculette",
+  "name": "Calculette App",
+  "description": "A simple Calculette app.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
