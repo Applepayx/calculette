@@ -2,7 +2,7 @@
   "short_name": "Calculette",
   "name": "Calculette App",
   "description": "A simple Calculette app.",
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
