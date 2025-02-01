@@ -17,6 +17,18 @@ const urlsToCache = [
   '/videos/video11.mp4',
   '/photos/Photo1.JPG',
   '/photos/Photo2.JPG',
+  '/photos/Photo3.JPG',
+  '/photos/Photo4.JPG',
+  '/photos/Photo5.JPG',
+  '/photos/Photo6.JPG',
+  '/photos/Photo7.JPG',
+  '/photos/Photo8.JPG',
+  '/photos/Photo9.JPG',
+  '/photos/Photo10.JPG',
+  '/photos/Photo11.JPG',
+  '/photos/Photo12.JPG',
+  '/photos/Photo13.JPG',
+  '/photos/Photo14.JPG',
   // Add all photos used in your gallery
   '/css/styles.css', // Add your CSS if needed, or directly include inline in HTML
   '/js/main.js' // Add your JS file if separated
