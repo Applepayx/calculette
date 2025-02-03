@@ -40,16 +40,19 @@
     	    margin-bottom: 20px
         }
 
-        .display {
-            color: white;
-            text-align: right;
-            padding: 10px;
-            font-size: 4em;
-            height: 80px;
-            border: none;
-            margin-bottom: 20px;
-            overflow-x: hidden;
-        }
+	.display {
+	    color: white;
+	    text-align: right;
+	    padding: 10px;
+	    font-size: 4em;
+	    height: 80px;
+	    border: none;
+	    margin-bottom: 20px;
+	    overflow: hidden;  /* Prevent content from overflowing */
+	    text-overflow: ellipsis;  /* Show ellipsis if content is too long */
+	    white-space: nowrap;  /* Prevent wrapping of numbers */
+	}
+
 
         .buttons {
             display: grid;
@@ -382,7 +385,26 @@
 		operator = null;
 		display.textContent = '0';
 	}
+
+	// Function to convert a number into scientific notation when too large
+	function formatNumber(number) {
+	    // If the number is too long, convert it to scientific notation
+	    if (number.length > 10) {
+	        let formattedNumber = parseFloat(number).toExponential(2);  // Convert to scientific notation with 2 decimals
+	        return formattedNumber;
+	    }
+	    return number;
+	}
 	
+	// Function to check if the number is too big and return a shortened version
+	function shortenLongNumber(number) {
+	    if (number.length > 10) {
+	        // Convert long number to scientific notation
+	        return parseFloat(number).toExponential(2); // Exponential format like 1.02e13
+	    } else {
+	        return number; // Return as is for smaller numbers
+	    }
+	}	    
 	function calculate() {
 		if (currentInput === password1) {
 			showGallery('gallery1-screen');
