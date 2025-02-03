@@ -38,6 +38,7 @@
             border-radius: 20px;
             background-color: #000;
     	    margin-bottom: 20px
+	    flex-shrink: 0;  /* Prevent the calculator from shrinking */
         }
 
 	.display {
@@ -48,9 +49,10 @@
 	    height: 80px;
 	    border: none;
 	    margin-bottom: 20px;
-	    overflow: hidden;  /* Ensures overflowed content is hidden */
+	    overflow: hidden;  /* Prevent content from overflowing */
 	    white-space: nowrap;  /* Prevent wrapping of numbers */
-	    text-overflow: clip;  /* Cuts off text at boundary without showing ellipsis */
+	    text-overflow: clip;  /* Hide overflowing text */
+	    flex-shrink: 0;  /* Prevent the display from shrinking or stretching */
 	}
 	
 	.buttons {
@@ -74,6 +76,8 @@
 	    transition: background-color 0.2s, transform 0.1s;
 	    width: 85px;
 	    height: 85px;
+	    flex-shrink: 0;  /* Prevent buttons from shrinking */
+
 	}
 	
 	button.operator {
