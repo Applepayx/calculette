@@ -69,30 +69,14 @@
 	    justify-content: center;
 	    color: white;
 	    cursor: pointer;
-	    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
 	    width: 85px;
 	    height: 85px;
-	    position: relative; /* To allow positioning of the shine effect */
-	    overflow: hidden; /* Hide the shine outside the button */
 	}
 	
-	/* Shine effect (only visible during hover) */
-	button::before {
-	    content: '';
-	    position: absolute;
-	    top: -100%;
-	    left: -100%;
-	    width: 300%;
-	    height: 300%;
-	    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-	    transform: rotate(45deg);
-	    transition: top 0.3s ease, left 0.3s ease; /* Smooth transition for shine movement */
-	}
-	
-	/* Hover effect with shine */
-	button:hover::before {
-	    top: -20%;
-	    left: -20%;
+	/* Glow effect when hovered */
+	button:hover {
+	    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.6); /* White glow */
 	}
 	
 	/* For operator buttons */
@@ -100,12 +84,8 @@
 	    background: #ff9500; /* iOS-style orange color */
 	}
 	
-	button.operator:hover::before {
-	    background: linear-gradient(45deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); /* Lighter shine for operator buttons */
-	}
-	
 	button.operator:hover {
-	    background-color: #f77b00; /* Darken the orange for hover */
+	    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.6); /* Glow for operator buttons */
 	}
 	
 	/* For function buttons (e.g., AC, +/-) */
@@ -114,12 +94,8 @@
 	    color: black;
 	}
 	
-	button.function:hover::before {
-	    background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)); /* Soft shine for function buttons */
-	}
-	
 	button.function:hover {
-	    background-color: #8e8e8e; /* Slightly darker gray for hover */
+	    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.6); /* Glow for function buttons */
 	}
 	
 	/* Zero button (wide) */
@@ -129,10 +105,9 @@
 	    width: auto;
 	}
 	
-	/* Active button effect for iOS style */
+	/* Active button effect */
 	button:active {
-	    transform: scale(0.95); /* Slightly shrink when clicked */
-	    box-shadow: none; /* Remove shadow when active */
+	    transform: scale(0.95); /* Slight shrink when clicked */
 	}
 
 
