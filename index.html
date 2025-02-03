@@ -237,9 +237,10 @@
         <div class="calculator">
             <div class="display" id="display">0</div>
             <div class="buttons">
-                <button class="function" onclick="clearDisplay()">AC</button>
+                <button class="function" onclick="clearDisplay()">C</button>
                 <button class="function" onclick="pressKey('+/-')">+/-</button>
                 <button class="function" onclick="pressKey('%')">%</button>
+		<button class="function" onclick="backspace()">←</button> <!-- Backspace button -->    
                 <button class="operator" onclick="pressKey('/')">÷</button>
                 <button onclick="pressKey('7')">7</button>
                 <button onclick="pressKey('8')">8</button>
@@ -386,13 +387,13 @@
 		display.textContent = '0';
 	}
 	    
-	function deleteLastDigit() {
-	    currentInput = currentInput.slice(0, -1);  // Removes last character
+
+	function backspace() {
+	    currentInput = currentInput.slice(0, -1); // Remove the last character
 	    if (currentInput === '') {
-	        display.textContent = '0';
-	    } else {
-	        display.textContent = currentInput;
+	        currentInput = '0'; // Ensure display shows '0' if there's no input
 	    }
+	    display.textContent = currentInput;
 	}
 	
 	function calculate() {
