@@ -57,35 +57,63 @@
             gap: 10px;
         }
 
-        button {
-            background: #505050;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5em;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-            width: 85px;
-            height: 85px;
-        }
-
-        button.operator {
-            background: #ff9500;
-            color: white;
-        }
-
-        button.function {
-            background: #a6a6a6;
-            color: black;
-        }
-
-        button:active {
-            transform: scale(0.9);
-        }
+	/* Button styles */
+	button {
+	    background: #505050;
+	    border: none;
+	    border-radius: 50%;
+	    font-size: 1.5em;
+	    font-weight: bold;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    color: white;
+	    cursor: pointer;
+	    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+	    width: 85px;
+	    height: 85px;
+	    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Soft shadow for a raised effect */
+	}
+	
+	/* Hover effect */
+	button:hover {
+	    background-color: #333; /* Darken background on hover */
+	    transform: scale(1.1); /* Slightly scale the button */
+	    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4); /* Darker shadow for emphasis */
+	}
+	
+	/* For operator buttons */
+	button.operator {
+	    background: #ff9500; /* iOS-style orange color */
+	}
+	
+	button.operator:hover {
+	    background-color: #f77b00; /* Darken the orange for hover */
+	}
+	
+	/* For function buttons (e.g., AC, +/-) */
+	button.function {
+	    background: #a6a6a6;
+	    color: black;
+	}
+	
+	button.function:hover {
+	    background-color: #8e8e8e; /* Slightly darker gray for hover */
+	    transform: scale(1.1);
+	}
+	
+	/* Zero button (wide) */
+	.button-0 {
+	    grid-column: span 2;
+	    border-radius: 30px;
+	    width: auto;
+	}
+	
+	/* Active button effect for iOS style */
+	button:active {
+	    transform: scale(0.95); /* Slightly shrink when clicked */
+	    box-shadow: none; /* Remove shadow when active */
+	}
 
         .button-0 {
             grid-column: span 2;
