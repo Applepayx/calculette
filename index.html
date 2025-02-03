@@ -364,19 +364,21 @@
 	const password2 = "1080";
 	
 	function pressKey(key) {
-		if (['+', '-', '*', '/'].includes(key)) {
-			if (currentInput) {
-				operator = key;
-				previousInput = currentInput;
-				currentInput = '';
-			}
-		} else {
-			if (currentInput === '0' && key !== '.') {
-				currentInput = '';
-			}
-			currentInput += key;
-		}
-		display.textContent = currentInput || previousInput || '0';
+	    if (['+', '-', '*', '/'].includes(key)) {
+	        if (currentInput) {
+	            operator = key;
+	            previousInput = currentInput;
+	            currentInput = '';
+	        }
+	    } else {
+	        if (currentInput === '0' && key !== '.') {
+	            currentInput = '';
+	        }
+	        currentInput += key;
+	    }
+	
+	    // Format number if it's too long
+	    display.textContent = shortenLongNumber(currentInput) || previousInput || '0';
 	}
 	
 	function clearDisplay() {
