@@ -59,7 +59,7 @@
 
 	/* Button styles */
 	button {
-	    background: #505050;
+	    background: #505050; /* Normal background */
 	    border: none;
 	    border-radius: 50%;
 	    font-size: 1.5em;
@@ -72,19 +72,36 @@
 	    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 	    width: 85px;
 	    height: 85px;
-	    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Soft shadow for a raised effect */
+	    position: relative; /* To allow positioning of the shine effect */
+	    overflow: hidden; /* Hide the shine outside the button */
 	}
 	
-	/* Hover effect */
-	button:hover {
-	    background-color: #333; /* Darken background on hover */
-	    transform: scale(1.1); /* Slightly scale the button */
-	    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4); /* Darker shadow for emphasis */
+	/* Shine effect (only visible during hover) */
+	button::before {
+	    content: '';
+	    position: absolute;
+	    top: -100%;
+	    left: -100%;
+	    width: 300%;
+	    height: 300%;
+	    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+	    transform: rotate(45deg);
+	    transition: top 0.3s ease, left 0.3s ease; /* Smooth transition for shine movement */
+	}
+	
+	/* Hover effect with shine */
+	button:hover::before {
+	    top: -20%;
+	    left: -20%;
 	}
 	
 	/* For operator buttons */
 	button.operator {
 	    background: #ff9500; /* iOS-style orange color */
+	}
+	
+	button.operator:hover::before {
+	    background: linear-gradient(45deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)); /* Lighter shine for operator buttons */
 	}
 	
 	button.operator:hover {
@@ -97,9 +114,12 @@
 	    color: black;
 	}
 	
+	button.function:hover::before {
+	    background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)); /* Soft shine for function buttons */
+	}
+	
 	button.function:hover {
 	    background-color: #8e8e8e; /* Slightly darker gray for hover */
-	    transform: scale(1.1);
 	}
 	
 	/* Zero button (wide) */
@@ -115,11 +135,6 @@
 	    box-shadow: none; /* Remove shadow when active */
 	}
 
-        .button-0 {
-            grid-column: span 2;
-            border-radius: 30px;
-            width: auto;
-        }
 
         .gallery1 {
             flex-direction: column;
