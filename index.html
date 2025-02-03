@@ -40,19 +40,16 @@
     	    margin-bottom: 20px
         }
 
-	.display {
-	    color: white;
-	    text-align: right;
-	    padding: 10px;
-	    font-size: 4em;
-	    height: 80px;
-	    border: none;
-	    margin-bottom: 20px;
-	    overflow: hidden; /* Prevents the display from breaking out */
-	    text-overflow: ellipsis; /* Adds ellipsis for too long text */
-	    white-space: nowrap; /* Prevents wrapping of text */
-	}
-
+        .display {
+            color: white;
+            text-align: right;
+            padding: 10px;
+            font-size: 4em;
+            height: 80px;
+            border: none;
+            margin-bottom: 20px;
+            overflow-x: hidden;
+        }
 
         .buttons {
             display: grid;
@@ -90,11 +87,11 @@
             transform: scale(0.9);
         }
 
-	.button-0 {
-	    border-radius: 50%; /* Adjust if needed */
-	    width: 85px;  /* Make sure the button is the same size as the others */
-	    height: 85px; /* Adjust to match button size */
-	}
+        .button-0 {
+            grid-column: span 2;
+            border-radius: 30px;
+            width: auto;
+        }
 
         .gallery1 {
             flex-direction: column;
@@ -237,10 +234,9 @@
         <div class="calculator">
             <div class="display" id="display">0</div>
             <div class="buttons">
-                <button class="function" onclick="clearDisplay()">C</button>
+                <button class="function" onclick="clearDisplay()">AC</button>
                 <button class="function" onclick="pressKey('+/-')">+/-</button>
                 <button class="function" onclick="pressKey('%')">%</button>
-		<button class="function" onclick="backspace()">←</button> <!-- Backspace button -->    
                 <button class="operator" onclick="pressKey('/')">÷</button>
                 <button onclick="pressKey('7')">7</button>
                 <button onclick="pressKey('8')">8</button>
@@ -365,19 +361,19 @@
 	const password2 = "1080";
 	
 	function pressKey(key) {
-	    if (['+', '-', '*', '/'].includes(key)) {
-	        if (currentInput) {
-	            operator = key;
-	            previousInput = currentInput;
-	            currentInput = '';
-	        }
-	    } else {
-	        if (currentInput === '0' && key !== '.') {
-	            currentInput = '';
-	        }
-	        currentInput += key;
-	    }
-	    display.textContent = currentInput || previousInput || '0';
+		if (['+', '-', '*', '/'].includes(key)) {
+			if (currentInput) {
+				operator = key;
+				previousInput = currentInput;
+				currentInput = '';
+			}
+		} else {
+			if (currentInput === '0' && key !== '.') {
+				currentInput = '';
+			}
+			currentInput += key;
+		}
+		display.textContent = currentInput || previousInput || '0';
 	}
 	
 	function clearDisplay() {
@@ -385,15 +381,6 @@
 		previousInput = '';
 		operator = null;
 		display.textContent = '0';
-	}
-	    
-
-	function backspace() {
-	    currentInput = currentInput.slice(0, -1); // Remove the last character
-	    if (currentInput === '') {
-	        currentInput = '0'; // Ensure display shows '0' if there's no input
-	    }
-	    display.textContent = currentInput;
 	}
 	
 	function calculate() {
