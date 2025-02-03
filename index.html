@@ -66,58 +66,41 @@
 	    overflow: hidden;
 	}
 
-	/* Button styles */
-	button {
-	    background: #505050; /* Normal background */
-	    border: none;
-	    border-radius: 50%;
-	    font-size: 1.5em;
-	    font-weight: bold;
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    color: white;
-	    cursor: pointer;
-	    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-	    width: 85px;
-	    height: 85px;
-	}
-	
-	/* Glow effect when hovered */
-	button:hover {
-	    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.6); /* White glow */
-	}
-	
-	/* For operator buttons */
-	button.operator {
-	    background: #ff9500; /* iOS-style orange color */
-	}
-	
-	button.operator:hover {
-	    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.6); /* Glow for operator buttons */
-	}
-	
-	/* For function buttons (e.g., AC, +/-) */
-	button.function {
-	    background: #a6a6a6;
-	    color: black;
-	}
-	
-	button.function:hover {
-	    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.6); /* Glow for function buttons */
-	}
-	
-	/* Zero button (wide) */
-	.button-0 {
-	    grid-column: span 2;
-	    border-radius: 30px;
-	    width: auto;
-	}
-	
-	/* Active button effect */
-	button:active {
-	    transform: scale(0.95); /* Slight shrink when clicked */
-	}
+        button {
+            background: #505050;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            width: 85px;
+            height: 85px;
+        }
+
+        button.operator {
+            background: #ff9500;
+            color: white;
+        }
+
+        button.function {
+            background: #a6a6a6;
+            color: black;
+        }
+
+        button:active {
+            transform: scale(0.9);
+        }
+
+        .button-0 {
+            grid-column: span 2;
+            border-radius: 30px;
+            width: auto;
+        }
 
 
         .gallery1 {
