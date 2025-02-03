@@ -419,6 +419,7 @@
 			previousInput = '';
 			operator = null;
 			display.textContent = currentInput;
+			display.textContent = shortenLongNumber(currentInput);
 		} else {
 			display.textContent = "Error";
 		}
