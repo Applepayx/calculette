@@ -40,16 +40,19 @@
     	    margin-bottom: 20px
         }
 
-        .display {
-            color: white;
-            text-align: right;
-            padding: 10px;
-            font-size: 4em;
-            height: 80px;
-            border: none;
-            margin-bottom: 20px;
-            overflow-x: hidden;
-        }
+	.display {
+	    color: white;
+	    text-align: right;
+	    padding: 10px;
+	    font-size: 4em;
+	    height: 80px;
+	    border: none;
+	    margin-bottom: 20px;
+	    overflow: hidden; /* Prevents the display from breaking out */
+	    text-overflow: ellipsis; /* Adds ellipsis for too long text */
+	    white-space: nowrap; /* Prevents wrapping of text */
+	}
+
 
         .buttons {
             display: grid;
@@ -361,19 +364,19 @@
 	const password2 = "1080";
 	
 	function pressKey(key) {
-		if (['+', '-', '*', '/'].includes(key)) {
-			if (currentInput) {
-				operator = key;
-				previousInput = currentInput;
-				currentInput = '';
-			}
-		} else {
-			if (currentInput === '0' && key !== '.') {
-				currentInput = '';
-			}
-			currentInput += key;
-		}
-		display.textContent = currentInput || previousInput || '0';
+	    if (['+', '-', '*', '/'].includes(key)) {
+	        if (currentInput) {
+	            operator = key;
+	            previousInput = currentInput;
+	            currentInput = '';
+	        }
+	    } else {
+	        if (currentInput === '0' && key !== '.') {
+	            currentInput = '';
+	        }
+	        currentInput += key;
+	    }
+	    display.textContent = currentInput || previousInput || '0';
 	}
 	
 	function clearDisplay() {
@@ -381,6 +384,15 @@
 		previousInput = '';
 		operator = null;
 		display.textContent = '0';
+	}
+	    
+	function deleteLastDigit() {
+	    currentInput = currentInput.slice(0, -1);  // Removes last character
+	    if (currentInput === '') {
+	        display.textContent = '0';
+	    } else {
+	        display.textContent = currentInput;
+	    }
 	}
 	
 	function calculate() {
