@@ -48,13 +48,9 @@
 	    height: 80px;
 	    border: none;
 	    margin-bottom: 20px;
-	    width: 100%;
-	    overflow: hidden; /* Hide anything that overflows */
-	    white-space: nowrap; /* Prevent line breaks */
-	    text-overflow: clip; /* Prevent showing any part of the hidden content */
-	    display: flex;
-	    justify-content: flex-end; /* Align the number to the right */
-	    align-items: center;
+	    overflow: hidden;  /* Ensures overflowed content is hidden */
+	    white-space: nowrap;  /* Prevent wrapping of numbers */
+	    text-overflow: clip;  /* Cuts off text at boundary without showing ellipsis */
 	}
 	
 	.buttons {
@@ -385,7 +381,14 @@
 	    // Format number if it's too long
 	    display.textContent = shortenLongNumber(currentInput) || previousInput || '0';
 	}
-	
+
+	function appendToDisplay(value) {
+	    if (display.textContent === "0") {
+	        display.textContent = value; // Start with the first number
+	    } else {
+	        display.textContent += value; // Append the new value
+	    }
+	}
 	function clearDisplay() {
 		currentInput = '';
 		previousInput = '';
