@@ -48,53 +48,58 @@
 	    height: 80px;
 	    border: none;
 	    margin-bottom: 20px;
-	    overflow: hidden;  /* Prevent content from overflowing */
-	    text-overflow: ellipsis;  /* Show ellipsis if content is too long */
-	    white-space: nowrap;  /* Prevent wrapping of numbers */
+	    width: 100%;
+	    overflow: hidden; /* Hide anything that overflows */
+	    white-space: nowrap; /* Prevent line breaks */
+	    text-overflow: clip; /* Prevent showing any part of the hidden content */
+	    display: flex;
+	    justify-content: flex-end; /* Align the number to the right */
+	    align-items: center;
+	}
+	
+	.buttons {
+	    display: grid;
+	    grid-template-columns: repeat(4, 1fr);
+	    gap: 10px;
+	    width: 100%;
+	}
+	
+	button {
+	    background: #505050;
+	    border: none;
+	    border-radius: 50%;
+	    font-size: 1.5em;
+	    font-weight: bold;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    color: white;
+	    cursor: pointer;
+	    transition: background-color 0.2s, transform 0.1s;
+	    width: 85px;
+	    height: 85px;
+	}
+	
+	button.operator {
+	    background: #ff9500;
+	    color: white;
+	}
+	
+	button.function {
+	    background: #a6a6a6;
+	    color: black;
+	}
+	
+	button:active {
+	    transform: scale(0.9);
+	}
+	
+	.button-0 {
+	    grid-column: span 2;
+	    border-radius: 30px;
+	    width: auto;
 	}
 
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        button {
-            background: #505050;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5em;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-            width: 85px;
-            height: 85px;
-        }
-
-        button.operator {
-            background: #ff9500;
-            color: white;
-        }
-
-        button.function {
-            background: #a6a6a6;
-            color: black;
-        }
-
-        button:active {
-            transform: scale(0.9);
-        }
-
-        .button-0 {
-            grid-column: span 2;
-            border-radius: 30px;
-            width: auto;
-        }
 
         .gallery1 {
             flex-direction: column;
