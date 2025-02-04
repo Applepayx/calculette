@@ -369,21 +369,39 @@
 	const password2 = "1080";
 	
 	function pressKey(key) {
+	    // If the key is an operator (+, -, *, /)
 	    if (['+', '-', '*', '/'].includes(key)) {
+	        // Format the current input and store the operator
 	        if (currentInput) {
 	            operator = key;
-	            previousInput = currentInput;
+	            // Shorten the number before storing
+	            previousInput = shortenLongNumber(currentInput);
 	            currentInput = '';
 	        }
+	    } else if (key === '=') {
+	        // Evaluate the result when the equals sign is pressed
+	        try {
+	            let result = eval(previousInput + operator + currentInput);
+	            currentInput = result.toString();
+	            // Shorten the result as well
+	            display.textContent = shortenLongNumber(currentInput);
+	        } catch (error) {
+	            display.textContent = 'Error';
+	        }
 	    } else {
+	        // If it's a number or decimal point, add it to the current input
 	        if (currentInput === '0' && key !== '.') {
-	            currentInput = '';
+	            currentInput = '';  // Reset the input if it's just zero
 	        }
 	        currentInput += key;
 	    }
 	
-	    // Format number if it's too long
-	    display.textContent = shortenLongNumber(currentInput) || previousInput || '0';
+	    // Update the display with the shortened number if necessary
+	    if (currentInput) {
+	        display.textContent = shortenLongNumber(currentInput);
+	    } else {
+	        display.textContent = previousInput || '0';
+	    }
 	}
 
 	function appendToDisplay(value) {
