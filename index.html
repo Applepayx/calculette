@@ -421,7 +421,7 @@
 	// Function to convert a number into scientific notation when too large
 	function formatNumber(number) {
 	    // If the number is too long, convert it to scientific notation
-	    if (number.length > 10) {
+	    if (number.length > 9) {
 	        let formattedNumber = parseFloat(number).toExponential(2);  // Convert to scientific notation with 2 decimals
 	        return formattedNumber;
 	    }
@@ -430,7 +430,7 @@
 	
 	// Function to check if the number is too big and return a shortened version
 	function shortenLongNumber(number) {
-	    if (number.length > 10) {
+	    if (number.length > 9) {
 	        // Convert long number to scientific notation
 	        return parseFloat(number).toExponential(2); // Exponential format like 1.02e13
 	    } else {
