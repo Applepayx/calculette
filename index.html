@@ -263,37 +263,7 @@
 	    background-color: rgba(255, 255, 255, 0.2);
 	}
 
-	/* Viewer Navigation Buttons */
-	.nav-button {
-	    position: absolute;
-	    top: 50%;
-	    transform: translateY(-50%);
-	    background-color: rgba(0, 0, 0, 0.5);
-	    color: white;
-	    border: none;
-	    padding: 10px;
-	    font-size: 24px;
-	    cursor: pointer;
-	    border-radius: 50%;
-	    width: 40px;
-	    height: 40px;
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    transition: background-color 0.3s;
-	}
-	
-	.nav-button:hover {
-	    background-color: rgba(0, 0, 0, 0.8);
-	}
-	
-	.prev-button {
-	    left: 10px;
-	}
-	
-	.next-button {
-	    right: 10px;
-	}
+
 
 	    
     </style>
@@ -427,8 +397,6 @@
 
 	<div id="viewer" style="display: none;">
 	    <button class="close-button" onclick="closeViewer()">X</button>
-	    <button class="nav-button prev-button" onclick="showPrevImage()">&#10094;</button>
-	    <button class="nav-button next-button" onclick="showNextImage()">&#10095;</button>
 	    <div id="viewer-content"></div>
 	</div>
 
@@ -495,7 +463,7 @@
 	// Function to convert a number into scientific notation when too large
 	function formatNumber(number) {
 	    // If the number is too long, convert it to scientific notation
-	    if (number.length > 9) {
+	    if (number.length > 8) {
 	        let formattedNumber = parseFloat(number).toExponential(2);  // Convert to scientific notation with 2 decimals
 	        return formattedNumber;
 	    }
@@ -504,7 +472,7 @@
 	
 	// Function to check if the number is too big and return a shortened version
 	function shortenLongNumber(number) {
-	    if (number.length > 9) {
+	    if (number.length > 8) {
 	        // Convert long number to scientific notation
 	        return parseFloat(number).toExponential(2); // Exponential format like 1.02e13
 	    } else {
@@ -568,6 +536,11 @@
 	    enableZoom(); // Enable zoom on gallery screens
 	}
 	
+	let currentImageIndex = 0;
+	let imageList = [];
+	let touchStartX = 0;
+	let touchEndX = 0;
+	
 	// Function to open the viewer with a specific image
 	function openViewer(src) {
 	    const viewer = document.getElementById('viewer');
@@ -588,6 +561,34 @@
 	    // Get the list of all images in the gallery
 	    imageList = Array.from(document.querySelectorAll('.gallery2-item img')).map(img => img.src);
 	    currentImageIndex = imageList.indexOf(src); // Set the current image index
+	
+	    // Add touch event listeners
+	    viewerContent.addEventListener('touchstart', handleTouchStart, false);
+	    viewerContent.addEventListener('touchmove', handleTouchMove, false);
+	    viewerContent.addEventListener('touchend', handleTouchEnd, false);
+	}
+	
+	// Function to handle touch start
+	function handleTouchStart(event) {
+	    touchStartX = event.touches[0].clientX;
+	}
+	
+	// Function to handle touch move
+	function handleTouchMove(event) {
+	    touchEndX = event.touches[0].clientX;
+	}
+	
+	// Function to handle touch end
+	function handleTouchEnd() {
+	    if (touchEndX < touchStartX) {
+	        // Swipe left: show next image
+	        showNextImage();
+	    } else if (touchEndX > touchStartX) {
+	        // Swipe right: show previous image
+	        showPrevImage();
+	    }
+	    touchStartX = 0; // Reset touch positions
+	    touchEndX = 0;
 	}
 	
 	// Function to show the next image
@@ -627,6 +628,12 @@
 	function closeViewer() {
 	    const viewer = document.getElementById('viewer');
 	    viewer.style.display = 'none';
+	
+	    // Remove touch event listeners
+	    const viewerContent = document.getElementById('viewer-content');
+	    viewerContent.removeEventListener('touchstart', handleTouchStart, false);
+	    viewerContent.removeEventListener('touchmove', handleTouchMove, false);
+	    viewerContent.removeEventListener('touchend', handleTouchEnd, false);
 	}
 
 	    
