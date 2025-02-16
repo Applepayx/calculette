@@ -62,6 +62,34 @@
 	    width: 100%;
 	}
 	
+	/* Add this CSS to style the button container */
+	.button-container {
+	    display: flex;
+	    justify-content: space-between; /* Space out the buttons */
+	    align-items: center;
+	    width: 100%;
+	    padding: 10px;
+	    box-sizing: border-box;
+	    background-color: black;
+	}
+	
+	/* Style for the buttons */
+	.button-container button {
+	    background-color: black;
+	    color: white;
+	    margin: 0;
+	    padding: 5px 10px;
+	    border: none;
+	    cursor: pointer;
+	    font-size: 1em;
+	    flex: 1; /* Allow buttons to take equal space */
+	    text-align: center;
+	}
+	
+	.button-container button:not(:last-child) {
+	    margin-right: 10px; /* Add spacing between buttons */
+	}
+	
 	button {
 	    background: #505050;
 	    border: none;
@@ -270,9 +298,12 @@
 	<!-- Gallery1 Screen -->
 	
 	<div id="gallery1-screen" class="screen gallery1" style="display: none;">
-		<button id="refresh-gallery2" style="background-color: black; color: white; margin: 0 2px; padding: 5px; border: none; cursor: pointer;" onclick="showCalculator()">Refresh</button>
-		<button id="refresh-gallery2" style="background-color: black; color: white; margin: 0 2px; padding: 5px; border: none; cursor: pointer;" onclick="showGallery('gallery2-screen')">Photos</button>
+	    <div class="button-container">
+		<button id="refresh-gallery1" onclick="showCalculator()">Refresh</button>
+	        <button id="switch-gallery1" onclick="showGallery('gallery2-screen')">Photos</button
 
+    	    </div>
+												    
 		<div class="gallery1-grid">
 			<div class="gallery1-item" onclick="window.location.href='instagram://user?username=demonmikaa'">
 				<video autoplay muted loop playsinline>
@@ -342,18 +373,20 @@
     <!-- Gallery2 Screen -->
 
 	<div id="gallery2-screen" class="screen gallery2" style="display: none;">
-		<button id="refresh-gallery2" style="background-color: black; margin: 3; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showCalculator()">Refresh</button>
-		<button id="refresh-gallery2" style="background-color: black; color: white; padding: 5px; border: none; cursor: pointer;" onclick="showGallery('gallery1-screen')">Videos</button>
+	    <div class="button-container">
+	        <button id="refresh-gallery2" onclick="showCalculator()">Refresh</button>
+	        <button id="switch-gallery2" onclick="showGallery('gallery1-screen')">Videos</button>
+    	    </div>
 		<div class="gallery2-grid">
-                    <script>
-                        for (let i = 1; i <= 100; i++) {
-                            document.write(`
-                                <div class="gallery2-item" onclick="openViewer('photos/Photo${i}.JPG')">
-                                    <img src="photos/Photo${i}.JPG" alt="Photo ${i}">
-                                </div>
-                            `);
-                        }
-                    </script>
+		    <script>
+			for (let i = 1; i <= 100; i++) {
+			    document.write(`
+				<div class="gallery2-item" onclick="openViewer('photos/Photo${i}.JPG')">
+				    <img src="photos/Photo${i}.JPG" alt="Photo ${i}">
+				</div>
+			    `);
+			}
+		    </script>
 		</div>
 	</div>
 	<div id="viewer" style="display: none;">
