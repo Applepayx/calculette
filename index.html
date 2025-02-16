@@ -263,6 +263,39 @@
 	    background-color: rgba(255, 255, 255, 0.2);
 	}
 
+	/* Viewer Navigation Buttons */
+	.nav-button {
+	    position: absolute;
+	    top: 50%;
+	    transform: translateY(-50%);
+	    background-color: rgba(0, 0, 0, 0.5);
+	    color: white;
+	    border: none;
+	    padding: 10px;
+	    font-size: 24px;
+	    cursor: pointer;
+	    border-radius: 50%;
+	    width: 40px;
+	    height: 40px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    transition: background-color 0.3s;
+	}
+	
+	.nav-button:hover {
+	    background-color: rgba(0, 0, 0, 0.8);
+	}
+	
+	.prev-button {
+	    left: 10px;
+	}
+	
+	.next-button {
+	    right: 10px;
+	}
+
+	    
     </style>
 </head>
 <body>
@@ -391,11 +424,16 @@
 	        </script>
 	    </div>
 	</div>
+
 	<div id="viewer" style="display: none;">
-		<button class="close-button" onclick="closeViewer()">X</button>
-		<div id="viewer-content"></div>
+	    <button class="close-button" onclick="closeViewer()">X</button>
+	    <button class="nav-button prev-button" onclick="showPrevImage()">&#10094;</button>
+	    <button class="nav-button next-button" onclick="showNextImage()">&#10095;</button>
+	    <div id="viewer-content"></div>
 	</div>
 
+
+	
     <script>
         let display = document.getElementById('display');
 	let currentInput = '';
@@ -530,35 +568,65 @@
 	    enableZoom(); // Enable zoom on gallery screens
 	}
 	
+	// Function to open the viewer with a specific image
 	function openViewer(src) {
 	    const viewer = document.getElementById('viewer');
 	    const viewerContent = document.getElementById('viewer-content');
 	    viewerContent.innerHTML = ''; // Clear existing content
 	
-	    if (src.endsWith('.mp4')) {
-	        const video = document.createElement('video');
-	        video.src = src;
-	        video.controls = true;
-	        video.autoplay = true;
-	        viewerContent.appendChild(video);
-	    } else {
-	        const img = document.createElement('img');
-	        img.src = src;
-	        img.style.objectFit = 'contain';
-	        img.style.maxWidth = '100%';
-	        img.style.maxHeight = '100%';
-	        viewerContent.appendChild(img);
-	    }
+	    // Create image element
+	    const img = document.createElement('img');
+	    img.src = src;
+	    img.style.objectFit = 'contain';
+	    img.style.maxWidth = '100%';
+	    img.style.maxHeight = '100%';
+	    viewerContent.appendChild(img);
 	
+	    // Show the viewer
 	    viewer.style.display = 'flex';
-	    enableZoom(); // Enable zoom in the viewer
+	
+	    // Get the list of all images in the gallery
+	    imageList = Array.from(document.querySelectorAll('.gallery2-item img')).map(img => img.src);
+	    currentImageIndex = imageList.indexOf(src); // Set the current image index
 	}
 	
+	// Function to show the next image
+	function showNextImage() {
+	    if (currentImageIndex < imageList.length - 1) {
+	        currentImageIndex++;
+	    } else {
+	        currentImageIndex = 0; // Loop back to the first image
+	    }
+	    updateViewerImage();
+	}
+	
+	// Function to show the previous image
+	function showPrevImage() {
+	    if (currentImageIndex > 0) {
+	        currentImageIndex--;
+	    } else {
+	        currentImageIndex = imageList.length - 1; // Loop to the last image
+	    }
+	    updateViewerImage();
+	}
+	
+	// Function to update the viewer with the current image
+	function updateViewerImage() {
+	    const viewerContent = document.getElementById('viewer-content');
+	    viewerContent.innerHTML = ''; // Clear existing content
+	
+	    const img = document.createElement('img');
+	    img.src = imageList[currentImageIndex];
+	    img.style.objectFit = 'contain';
+	    img.style.maxWidth = '100%';
+	    img.style.maxHeight = '100%';
+	    viewerContent.appendChild(img);
+	}
+	
+	// Function to close the viewer
 	function closeViewer() {
 	    const viewer = document.getElementById('viewer');
 	    viewer.style.display = 'none';
-	    document.getElementById('gallery2-screen').style.display = 'flex';
-	    disableZoom(); // Return to zoom-disabled state
 	}
 
 	    
