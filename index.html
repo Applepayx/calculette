@@ -540,6 +540,7 @@
 	let imageList = [];
 	let touchStartX = 0;
 	let touchEndX = 0;
+	let isZooming = false; // Track if the user is zooming
 	
 	// Function to open the viewer with a specific image
 	function openViewer(src) {
@@ -570,25 +571,43 @@
 	
 	// Function to handle touch start
 	function handleTouchStart(event) {
-	    touchStartX = event.touches[0].clientX;
+	    if (event.touches.length === 1) {
+	        // Only track single-finger touch for swipe
+	        touchStartX = event.touches[0].clientX;
+	        isZooming = false; // Reset zooming flag
+	    } else if (event.touches.length > 1) {
+	        // Multi-touch detected (zooming)
+	        isZooming = true;
+	    }
 	}
 	
 	// Function to handle touch move
 	function handleTouchMove(event) {
-	    touchEndX = event.touches[0].clientX;
+	    if (event.touches.length === 1 && !isZooming) {
+	        // Only track single-finger touch for swipe if not zooming
+	        touchEndX = event.touches[0].clientX;
+	    } else if (event.touches.length > 1) {
+	        // Multi-touch detected (zooming)
+	        isZooming = true;
+	    }
 	}
 	
 	// Function to handle touch end
 	function handleTouchEnd() {
-	    if (touchEndX < touchStartX) {
-	        // Swipe left: show next image
-	        showNextImage();
-	    } else if (touchEndX > touchStartX) {
-	        // Swipe right: show previous image
-	        showPrevImage();
+	    if (!isZooming && touchStartX !== 0 && touchEndX !== 0) {
+	        // Only process swipe if not zooming
+	        if (touchEndX < touchStartX) {
+	            // Swipe left: show next image
+	            showNextImage();
+	        } else if (touchEndX > touchStartX) {
+	            // Swipe right: show previous image
+	            showPrevImage();
+	        }
 	    }
-	    touchStartX = 0; // Reset touch positions
+	    // Reset touch positions and zooming flag
+	    touchStartX = 0;
 	    touchEndX = 0;
+	    isZooming = false;
 	}
 	
 	// Function to show the next image
